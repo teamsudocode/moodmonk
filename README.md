@@ -1,0 +1,2 @@
+# moodmonk
+Analyses your mood

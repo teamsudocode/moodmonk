@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>result</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" rel="stylesheet" type="text/css">
+    <link href="result.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="background">
+        <div class="wrapper1">
+            <div class="row1">
+                <div id="r1c1" class="c3"> </div>
+                <div id="r1c2" class="c3"> </div>
+                <div id="r1c3" class="c3"> </div>
+            </div>
+            <div class="row2">
+                <div id="r2c1" width = "100%" class="c3"> </div>
+            </div>
+        </div>
+        <div class = "wrapper2">
+         
+        </div>
+    </div>
+</body>
+
+<script>
+    function loadJsFile(src, async) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.type = "text/javascript";
+        s.async = async;                                 // <-- this is important
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+    var jsList = [
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js',
+        '/results.js'
+    ];
+    for (var i = 0; i < jsList.length; i++) {
+        loadJsFile(jsList[i], false);
+    }
+
+</script>
+
+</html>

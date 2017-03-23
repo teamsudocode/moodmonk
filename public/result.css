@@ -1,0 +1,16 @@
+.background{
+    display: flex;
+    flex-direction: row;
+}
+.wrapper1{
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+}
+.row1{
+    display: flex;
+    flex-direction: row;
+}
+.wrapper2{
+    
+}

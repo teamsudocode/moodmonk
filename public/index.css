@@ -419,7 +419,7 @@ button:focus {
     margin-top: 20px;
 }
 
-#cr2>button {
+#cr2>a {
     margin: 5px;
     background-color: transparent;
     border: none;
@@ -427,6 +427,7 @@ button:focus {
     font-size: 2vw;
     font-family: 'Quicksand', sans-serif;
     color: white;
+    text-decoration: none;
 }
 
 .hidden {

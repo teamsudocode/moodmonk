@@ -29,6 +29,10 @@ app.get('/logger/day/:date', function (req, res) {
     res.send(logger.getByDate(req.params.date));
 });
 
+app.get('/logger/range/:from/:to', function (req, res) {
+    res.send(logger.getBetweenDates(req.params.from, req.params.to));
+});
+
 /*app.get('/recommend/:id', function (req, res) {
 
     console.log(req.params.id);

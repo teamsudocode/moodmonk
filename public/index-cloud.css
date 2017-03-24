@@ -9,10 +9,10 @@ html {
     bottom: 0;
     left: 0;
     margin: auto;
-    height: 30%;
     overflow: hidden;
     animation: FadeIn 3s ease-out;
     user-select: none;
+    overflow: hidden;
 }
 
 @keyframes FadeIn {
@@ -36,6 +36,7 @@ html {
     animation-timing-function: linear;
     animation-name: Float, FadeFloat;
     z-index: 1;
+    overflow: hidden;
 }
 
 .Cloud.Foreground {

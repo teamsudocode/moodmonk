@@ -247,14 +247,15 @@ $.get("/logger/day/3-24-2017", function (data) {
 function carding(mood){
     console.log(mood);
     $.get("/recommend/video/" + mood, function(data){
-        document.getElementById("link").innerHTML = data;
-        documet.getElementById("link").href = data;
+        document.getElementById("vlink").innerHTML = data;
+        document.getElementById("vlink").href = data;
     });
     $.get("/recommend/quote/" + mood, function(data){
-        document.getElementById("").innerHTML = data;
+        console.log(data);
+        document.getElementById("qlink").innerHTML = data;
     })
     $.get("/recommend/activity/" + mood, function(data){
-        document.getElementById("").innerHTML = data;
+        document.getElementById("actlink").innerHTML = data;
     })
 }
 

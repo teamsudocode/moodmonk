@@ -20,7 +20,7 @@ function getQuotes(emotion, callback) {
         let quote = json;//contents.quotes[0].quote; // quote
         callback(quote);
     });
-} 
+}
 
 function getVideo(emotion, callback) {
     //retrieving videos

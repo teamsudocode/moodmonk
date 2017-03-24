@@ -1,6 +1,6 @@
 // const anondataFile = '../data/anonymous.json';
 // const dataFileName = '../data/data.json';
-const dataFileName = "../data/data.json";
+const dataFileName = "/home/himanshu/development/github/moodmonk/data/data.json";
 
 var data = require(dataFileName);
 var fs = require("fs");
@@ -14,7 +14,6 @@ function getDateKey() {
 }
 
 function log(json) {
-    console.log('data' + JSON.stringify(data));
     let key = getDateKey();
     if (!data.hasOwnProperty(key)) {
         data[key] = json;
@@ -91,25 +90,33 @@ function getDataByDate(date) {
 
 function getDataBetweenDates(from, to) {
     let currentJson = null;
-    let fromYear = parseInt(from.split('-')[2]), toYear = parseInt(to.split('-')[2]);
-    let fromMonth = parseInt(from.split('-')[0]), toMonth = parseInt(to.split('-')[0]);
-    let fromDay = parseInt(from.split('-')[1]), toDay = parseInt(to.split('-')[1]);
+
+    Date.prototype.addDays = function(days) {
+        var dat = new Date(this.valueOf());
+        dat.setDate(dat.getDate() + days);
+        return dat;
+    };
+
+    function getDates(startDate, stopDate) {
+        let dateArray = new Array();
+        let currentDate = startDate;
+        while (currentDate <= stopDate) {
+            dateArray.push(currentDate);
+            currentDate = currentDate.addDays(1);
+        }
+        return dateArray;
+    }
 
     let responseJson = {};
 
-    for (let year = fromYear; year <= toYear; year++) {
-        for (let month = fromMonth; month <= toMonth; month++) {
-            for (day = fromDay; day <= fromDay; day++) {
-
-                let dateKey = month+'-'+day+'-'+year;
-                currentJson = getDataByDate(dateKey);
-                if (currentJson != '404') {
-                    responseJson[dateKey] = currentJson;
-                }
-
-            }
+    for (let date in getDates(new Date(from), new Date(to))) {
+        let dateKey = getDateKey(date);
+        let currentJson = getDataByDate(dateKey);
+        if (currentJson != '404') {
+            responseJson[dateKey] = currentJson;
         }
     }
+
     return responseJson;
 }
 

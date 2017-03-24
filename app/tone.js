@@ -1,22 +1,35 @@
-var ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
+var request = require('request');
+var r = request.defaults({'proxy': 'http://172.31.1.6:8080/'});
 
-var tone_analyzer = new ToneAnalyzerV3({
-    url: "https://gateway.watsonplatform.net/tone-analyzer/api",
-    username: "f4dc0523-93cd-445a-8bda-34396663adba",
-    password: "z3MgWVkuEvOd",
-    version_date: '2016-05-19'
-});
+var headers = {
+    'Content-Type': 'application/json'
+};
 
-function tone(text, myCallback){
-    console.log('inside tone');
-    tone_analyzer.tone({ text: text }, function (err, tone) {
-        if (err) {
-            console.log('error occured in tone');
-            return (err);
+var dataString = '{"text": "A word is dead when it is said, some say. Emily Dickinson"}';
+
+var options = {
+    url: 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2016-05-19',
+    method: 'POST',
+    headers: headers,
+    body: dataString,
+    auth: {
+        'username' : "f4dc0523-93cd-445a-8bda-34396663adba",
+        'pass': 'z3MgWVkuEvOd'
+    }
+};
+
+var tone = function(text, mycallback) {
+    options.body = '{"text": "' + text + '"}';
+    r(options, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log('requests successful');
+            mycallback(response);
+        } else {
+            console.log('response failed');
+            console.log(error);
         }
-        else
-            myCallback(JSON.stringify(tone, null , 2));
     });
-}
+};
+
 
 module.exports = { tone }

@@ -26,4 +26,11 @@ var close = function () {
 
 document.getElementById("start").addEventListener('click', begin);
 document.getElementById("close").addEventListener('click', close);
-
+var cb = document.getElementById("cb-1");
+console.log(cb);
+var ctr = 0;
+document.getElementById("mic").onclick = function(e) {
+    ctr = (ctr+1) %2;
+    if (ctr == 0)
+        micClicked();
+};

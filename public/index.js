@@ -1,10 +1,20 @@
+var en, hi;
+en = 0;
+hi = 0;
 var begin = function () {
-    "use strict";
-    document.getElementById("contentwrap").className = "animated flipOutX";
-    document.getElementById("close").className = "animated fadeIn";
-    document.getElementById("Clouds").className = "hidden";
-    document.getElementById("mic").className = "animated fadeInUpBig";
-    document.body.style.backgroundImage = "none";
+    if (hi + en === 1) {
+        "use strict";
+        document.getElementById("contentwrap").className = "animated flipOutX";
+        document.getElementById("close").className = "animated fadeIn";
+        document.getElementById("Clouds").className = "hidden";
+        document.getElementById("mic").className = "animated fadeInUpBig";
+        document.body.style.backgroundImage = "none";
+    }
+    else if (hi + en === 2) {
+        alert("Select only one Language!");
+    } else {
+        alert("Please Choose A Language");
+    }
 };
 
 var close = function () {
@@ -89,3 +99,20 @@ document.getElementById("result").onclick = function () {
     document.getElementById("Clouds").style.display = "block";
     setTimeout(function () { window.location = 'result.html' }, 5000);
 }
+
+document.getElementById("circle-cont").onclick = function () {
+    if (en === 0) {
+        en = 1;
+    }
+    else {
+        en = 0;
+    }
+};
+
+document.getElementById("circle-cont-2").onclick = function () {
+    if (hi === 0) {
+        hi = 1;
+    } else {
+        hi = 0;
+    }
+};

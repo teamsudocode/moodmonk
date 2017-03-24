@@ -59,7 +59,7 @@ button:focus {
     padding: 0.7vw;
     font-size: 1.5em;
     cursor: pointer;
-    margin-top: 5vw;
+    margin-top: 50px;
 }
 
 .msg {
@@ -1059,4 +1059,197 @@ button:focus {
 
 #load div {
     font-size: 20px;
+}
+
+
+/*select-css*/
+
+@keyframes checkIn {
+    0% {
+        top: -1%;
+        height: 10px;
+        width: 24px;
+        margin-left: -12px;
+    }
+    7% {
+        top: -4%;
+        height: 12.5px;
+        width: 22px;
+        margin-left: -11px;
+    }
+    17% {
+        top: -2%;
+        height: 15px;
+        width: 12px;
+        margin-left: -6px;
+    }
+    25% {
+        top: 20%;
+        height: 15px;
+        width: 10px;
+        margin-left: -5px;
+    }
+    30% {
+        top: 102%;
+        height: 10px;
+        width: 28px;
+        margin-left: -14px;
+    }
+    45% {
+        top: 50%;
+        height: 15px;
+        width: 6px;
+        margin-left: -3px;
+        margin-top: -10px;
+    }
+    60% {
+        top: 50%;
+        height: 20px;
+        width: 10px;
+        margin-left: -5px;
+    }
+    70% {
+        top: 50%;
+        height: 40px;
+        width: 40px;
+        margin-left: -20px;
+        margin-top: -20px;
+    }
+    80% {
+        top: 50%;
+        height: 32px;
+        width: 32px;
+        margin-left: -16px;
+        margin-top: -16px;
+    }
+    90% {
+        top: 50%;
+        height: 24px;
+        width: 24px;
+        margin-left: -12px;
+        margin-top: -12px;
+    }
+    100% {
+        top: 50%;
+        height: 24px;
+        width: 24px;
+        margin-left: -12px;
+        margin-top: -12px;
+    }
+}
+
+@keyframes checkOut {
+    0% {
+        overflow: visible;
+        top: 50%;
+        width: 30px;
+        height: 30px;
+        margin-top: -17px;
+        margin-left: -17px;
+        border: 2px solid white;
+        opacity: 1;
+    }
+    100% {
+        width: 46px;
+        top: 50%;
+        height: 46px;
+        margin-top: -25px;
+        margin-left: -25px;
+        border: 2px solid white;
+        opacity: 0;
+    }
+}
+
+#container {
+    position: relative;
+    display: inline-block;
+}
+
+input#circle-input {
+    display: none;
+}
+
+input#circle-input:checked+label#circle-cont {
+    overflow: hidden;
+}
+
+input#circle-input:checked+label#circle-cont #circle {
+    background: white;
+    animation: checkIn 1s forwards linear 0s 1;
+}
+
+label#circle-cont {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #FFF;
+    display: block;
+    position: relative;
+    float: left;
+    overflow: visible;
+}
+
+label#circle-cont #circle {
+    background: transparent;
+    position: absolute;
+    left: 50%;
+    border-radius: 50%;
+    top: -100%;
+    animation: checkOut 0.25s forwards linear 0s 1;
+}
+
+label#label-name {
+    color: #FFF;
+    font-family: 'Quicksand', sans-serif;
+    position: relative;
+    float: left;
+    font-size: 1.25em;
+    margin: 4px 12px;
+}
+
+input#circle-input-2 {
+    display: none;
+}
+
+input#circle-input-2:checked+label#circle-cont-2 {
+    overflow: hidden;
+}
+
+input#circle-input-2:checked+label#circle-cont-2 #circle-2 {
+    background: white;
+    animation: checkIn 1s forwards linear 0s 1;
+}
+
+label#circle-cont-2 {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #FFF;
+    display: block;
+    position: relative;
+    float: left;
+    overflow: visible;
+}
+
+label#circle-cont-2 #circle-2 {
+    background: transparent;
+    position: absolute;
+    left: 50%;
+    border-radius: 50%;
+    top: -100%;
+    animation: checkOut 0.25s forwards linear 0s 1;
+}
+
+label#label-name-2 {
+    color: #FFF;
+    font-family: 'Quicksand', sans-serif;
+    position: relative;
+    float: left;
+    font-size: 1.25em;
+    margin: 4px 12px;
+}
+
+#r3 {
+    font-size: 1.5em;
+    margin-top: 30px;
 }

@@ -79,12 +79,13 @@ document.getElementById("mic").onclick = function () {
 };
 
 document.getElementById("result").onclick = function () {
-    document.getElementById("mic").className="hidden";
-    document.getElementById("close").className="hidden";
-    document.getElementById("logomark").className="hidden";
-    document.getElementById("result").classList="hidden";
+    document.body.style.backgroundColor = "#26b2fa";
+    document.getElementById("mic").className = "hidden";
+    document.getElementById("close").className = "hidden";
+    document.getElementById("logomark").className = "hidden";
+    document.getElementById("result").classList = "hidden";
     document.getElementById("loading").className = "visible";
     document.getElementById("loading2").className = "visible";
-    document.getElementById("Clouds").style.display="block";
-    setTimeout(function () { window.location = 'result.html'}, 5000);
+    document.getElementById("Clouds").style.display = "block";
+    setTimeout(function () { window.location = 'result.html' }, 5000);
 }

@@ -25,6 +25,10 @@ app.get('/askWatson/:query', function (req, res) {
     tone(req.params.query, myCallback);
 });
 
+app.get('/logger/day/:date', function (req, res) {
+    res.send(logger.getByDate(req.params.date));
+});
+
 /*app.get('/recommend/:id', function (req, res) {
 
     console.log(req.params.id);

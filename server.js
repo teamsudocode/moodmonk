@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 
 var tone = require('./app/tone').tone;
-// var recommend = require('./app/recommend').recommend;
+var recommend = require('./app/recommend');
 
 app.listen(3000, function (req, res) {
     console.log("server started");
@@ -29,11 +29,17 @@ app.get('/logger/day/:date', function (req, res) {
     res.send(logger.getByDate(req.params.date));
 });
 
-/*app.get('/recommend/:id', function (req, res) {
+app.get('/recommend/:what/:expression', function (req, res) {
 
-    console.log(req.params.id);
-    function myCallback(retvalue) {
-        console.log("inside callback" + retvalue);
-    };
-    recommend(req.params.id, myCallback);
-});*/
+    function customCallback(text) {
+        res.send(text);
+    }
+    switch(req.params.what) {
+        case 'video':    recommend.getVideo(req.params.expression, customCallback);      break;
+        case 'activity': recommend.getActivities(req.params.expression, customCallback); break;
+        case 'quote':    recommend.getQuotes(req.params.expression, customCallback);     break;
+        case 'test':    recommend.test(req.params.expression, customCallback);     break;
+        default :        res.send('invalid');
+    }
+
+});

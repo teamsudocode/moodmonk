@@ -23,13 +23,12 @@ var tone = function(text, mycallback) {
     r(options, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log('requests successful');
-            mycallback(response);
+            mycallback(JSON.parse(response.toJSON().body));
         } else {
             console.log('response failed');
-            console.log(error);
         }
     });
 };
 
 
-module.exports = { tone }
+module.exports = { tone };

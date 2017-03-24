@@ -168,7 +168,7 @@ $.get("/logger/day/"+ dati, function (data) {
         });
     }, 2500);
 
-    var chart5 = c3.generate({
+    var chart4 = c3.generate({
         bindto: '#gl1',
         data: {
             columns: [
@@ -184,14 +184,16 @@ $.get("/logger/day/"+ dati, function (data) {
 });
 
 function carding(mood){
+    console.log(mood);
     $.get("/recommend/video/" + mood, function(data){
-        document.getElementById("").innerHTML(data);
+        document.getElementById("link").innerHTML = data;
+        documet.getElementById("link").href = data;
     });
     $.get("/recommend/quote/" + mood, function(data){
-        document.getElementById("").innerHTML(data);
+        document.getElementById("").innerHTML = data;
     })
     $.get("/recommend/activity/" + mood, function(data){
-        document.getElementById("").innerHTML(data);
+        document.getElementById("").innerHTML = data;
     })
 }
 

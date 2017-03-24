@@ -18,6 +18,7 @@ var close = function () {
 
 var change = function (mood) {
     "use strict";
+    console.log('changing to ' + mood);
     let moodcolor,textcolor;
     switch (mood) {
         case ("anger"):
@@ -53,4 +54,3 @@ document.getElementById("mic").onclick = function () {
     if (ctr == 0)
         micClicked();
 };
-module.exports = { change };

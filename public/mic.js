@@ -42,6 +42,7 @@ function setupRecognitionHandlers() {
             }
         }
         final_transcript = capitalize(final_transcript);
+        askWatson(current_transcript, change);
         console.log(final_transcript);
         if (resultDisplay)
             resultDisplay.innerText = final_transcript;
@@ -97,6 +98,13 @@ function stopListening()
     if (recognition)
         listening = false;
     recognition = null;
+}
+
+function askWatson(text, callback) {
+    if (window.jQuery === undefined) {
+        console.log("i need to do ajax. import jquery before me");
+    }
+    $.get('/askWatson/'+encodeURIComponent(text), callback);
 }
 
 var first_char = /\S/;

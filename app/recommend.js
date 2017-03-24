@@ -17,7 +17,7 @@ var recommend = function (emotion) {
     else if (emotion == "sadness") { feel = "funny"; }
     //retrieving quotes
     r('http://quotes.rest/qod.json?category=' + feel, function (error, response, body) {
-    
+
         json = JSON.parse(body);
         console.log(json);
         firstDone = true;
@@ -29,15 +29,15 @@ var recommend = function (emotion) {
     x = results.url.href;
     console.log('asdfadfsadfadsf');
     request({ url: x, json: true, proxy: 'http://172.31.1.6:8080/' }, function (err, localres, json) {
-        
+
         if (err) {
             throw err;
         }
-            vid = "https://www.youtube.com/watch?v=" + json.items[0].id.videoId;
-            console.log(vid);
-            secondDone = true;
+        vid = "https://www.youtube.com/watch?v=" + json.items[0].id.videoId;
+        console.log(vid);
+        secondDone = true;
     });
-    
+
     //retrieving activities
     switch (emotion) {
         case 'anger':
@@ -60,21 +60,24 @@ var recommend = function (emotion) {
     console.log(act);
     console.log(firstDone);
     console.log(secondDone);
-    
-    while(firstDone == false || secondDone == false);
+
+    setTimeout(function() {
+        
+    }, timeout);
+    //while (firstDone == false || secondDone == false);
     console.log(firstDone);
     console.log(secondDone);
-    
+
     var values = [];
     values.push(quote);
-    values.push(act);   
+    values.push(act);
     values.push(vid);
-    return(values)
+    return (values)
 
 }
 
 
 
-var a = recommend('fear'); 
+var a = recommend('fear');
 console.log(a);
 module.exports = { recommend }

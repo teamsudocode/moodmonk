@@ -1056,3 +1056,7 @@ button:focus {
         opacity: 0;
     }
 }
+
+#load div {
+    font-size: 20px;
+}

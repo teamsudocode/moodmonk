@@ -1,16 +1,78 @@
-.background{
+html {
+    font-family: 'Didact Gothic', sans-serif;
+}
+
+.more {
+    cursor: pointer;
+    color: lightgrey;
+    float: right;
+}
+
+.hidden {
+    display: none;
+}
+
+.cardhead {
     display: flex;
     flex-direction: row;
+    align-content: center;
+    align-items: center;
+    text-align: center;
 }
-.wrapper1{
-    display: flex;
-    flex-direction: column;
-    width: 20vw;
+
+.cardhead span {
+    margin-left: 1vw;
+    font-size: 1.5vw;
 }
-.row1{
-    display: flex;
-    flex-direction: row;
+
+#link,
+#moresongs {
+    font-size: 1vw;
 }
-.wrapper2{
-    
+
+#sug1 {
+    margin-top: 1vw;
+    margin-right: 0.5vw;
+}
+
+#g1,
+#g2,
+#g3 {
+    height: 200px;
+    display: block;
+}
+
+#gl1{
+    width: 100%;
+    height: 200px;
+    display: block;
+    margin-top: 40px;
+}
+
+#grapharea,
+#suggarea {
+    padding: 30px;
+}
+
+.hl {
+    font-size: 1.8vw;
+    font-family: 'Oswald', sans-serif;
+    background-color: #e3f2fd;
+    border-left: 4px solid #90caf9 ;
+    color: black;
+}
+
+#l0 {
+    font-size: 2.2vw;
+    font-family: 'Didact Gothic', sans-serif;
+}
+
+
+#lorem{
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 1vw;
+    color: lightgrey;
+}
+#moodi{
+  color: orange;
 }

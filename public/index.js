@@ -2,19 +2,12 @@ var en, hi;
 en = 0;
 hi = 0;
 var begin = function () {
-    if (hi + en === 1) {
-        "use strict";
-        document.getElementById("contentwrap").className = "animated flipOutX";
-        document.getElementById("close").className = "animated fadeIn";
-        document.getElementById("Clouds").className = "hidden";
-        document.getElementById("mic").className = "animated fadeInUpBig";
-        document.body.style.backgroundImage = "none";
-    }
-    else if (hi + en === 2) {
-        alert("Select only one Language!");
-    } else {
-        alert("Please Choose A Language");
-    }
+    "use strict";
+    document.getElementById("contentwrap").className = "animated flipOutX";
+    document.getElementById("close").className = "animated fadeIn";
+    document.getElementById("Clouds").className = "hidden";
+    document.getElementById("mic").className = "animated fadeInUpBig";
+    document.body.style.backgroundImage = "none";
 };
 
 var close = function () {
@@ -83,9 +76,14 @@ document.getElementById("close").addEventListener('click', close);
 var ctr = 0;
 document.getElementById("mic").onclick = function () {
     document.getElementById("controls").className = "animated fadeInUpBig";
+    let enRad = document.getElementById('circle-input');
+    let hiRad = document.getElementById('circle-input-2');
     ctr = (ctr + 1) % 2;
-    if (ctr == 0)
+    if (ctr == 0) {
+        if (enRad.checked) currentLanguage = 'en-IN';
+        else if (hiRad.checked) currentLanguage = 'hi-IN';
         micClicked();
+    }
 };
 
 document.getElementById("result").onclick = function () {
@@ -97,25 +95,5 @@ document.getElementById("result").onclick = function () {
     document.getElementById("loading").className = "visible";
     document.getElementById("loading2").className = "visible";
     document.getElementById("Clouds").style.display = "block";
-    setTimeout(function () { window.location = 'result.html' }, 5000);
+    setTimeout(function () { window.location = 'result.html'; }, 5000);
 }
-<<<<<<< HEAD
-=======
-
-document.getElementById("circle-cont").onclick = function () {
-    if (en === 0) {
-        en = 1;
-    }
-    else {
-        en = 0;
-    }
-};
-
-document.getElementById("circle-cont-2").onclick = function () {
-    if (hi === 0) {
-        hi = 1;
-    } else {
-        hi = 0;
-    }
-};
->>>>>>> 16df3a2f42e4359b17a6539f822060903d814693

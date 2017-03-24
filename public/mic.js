@@ -66,12 +66,17 @@ function setupMic(micElem, outputElem, languageSelect, errorHandlerDiv)
     resultDisplay = outputElem;
 }
 
-function setLang() {
-    if (! languageSelector) {
-        console.log("setLang: wtf");
-        return;
-    }
-    currentLanguage = langs[languageSelector.selectedIndex][1];
+// function setLang() {
+//     if (! languageSelector) {
+//         console.log("setLang: wtf");
+//         return;
+//     }
+//     currentLanguage = langs[languageSelector.selectedIndex][1];
+// }
+
+function setLang(lang) {
+    if (lang == 'en') currentLanguage = 'en-IN';
+    else if (lang == 'hi') currentLanguage = 'hi-IN';
 }
 
 function micClicked(event) {
@@ -79,6 +84,10 @@ function micClicked(event) {
         stopListening();
         return;
     }
+    try {
+        if (en == 1) setLang('en');
+        else if (hi == 1) setLang('hi');
+    } catch(e) {}
     startListening();
 }
 

@@ -45,7 +45,7 @@ function setupRecognitionHandlers() {
         askWatson(current_transcript, change);
         console.log(final_transcript);
         if (resultDisplay)
-            resultDisplay.innerText = final_transcript;
+            resultDisplay.innerText = current_transcript;
         // final_span.innerHTML = linebreak(final_transcript);
     };
 }
@@ -98,6 +98,7 @@ function stopListening()
     if (recognition)
         listening = false;
     recognition = null;
+    resultDisplay = null;
 }
 
 function askWatson(text, callback) {

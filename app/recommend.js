@@ -6,39 +6,51 @@ google.options({ proxy: 'http://172.31.1.6:8080/' });
 
 var youtube = google.youtube({ version: 'v3', auth: 'AIzaSyAoN1RLSoqgf7ujPK-2cfT8pz4qQR1_tvg' });
 
-var recommend = function (emotion) {
-    var feel, quote, act, vid;
-    var firstDone = false, secondDone = false;
-
-    if (emotion == "anger") { feel = "love"; }
-    else if (emotion == "disgust") { feel = "art"; }
-    else if (emotion == "fear") { feel = "management"; }
-    else if (emotion == "joy") { feel = "life"; }
-    else if (emotion == "sadness") { feel = "funny"; }
+function getQuotes(emotion, callback) {
     //retrieving quotes
+    let feel = '';
+    if      (emotion == "anger")    { feel = "love";       }
+    else if (emotion == "disgust")  { feel = "art";        }
+    else if (emotion == "fear")     { feel = "management"; }
+    else if (emotion == "joy")      { feel = "life";       }
+    else if (emotion == "sadness")  { feel = "funny";      }
+    console.log('getting quotes');
     r('http://quotes.rest/qod.json?category=' + feel, function (error, response, body) {
-
-        json = JSON.parse(body);
-        console.log(json);
-        firstDone = true;
-        //quote = json.contents.quotes[0].quote; // quote
-        //console.log(quote);
+        let json = JSON.parse(body);
+        let quote = json.contents.quotes[0].quote; // quote
+        callback(quote);
     });
+} 
+
+function getVideo(emotion, callback) {
     //retrieving videos
+    console.log('getting videos');
+    let feel = '';
+    if      (emotion == "anger")    { feel = "love";       }
+    else if (emotion == "disgust")  { feel = "art";        }
+    else if (emotion == "fear")     { feel = "management"; }
+    else if (emotion == "joy")      { feel = "life";       }
+    else if (emotion == "sadness")  { feel = "funny";      }
     var results = youtube.search.list({ part: 'id,snippet', q: feel, maxResults: 25 });
     x = results.url.href;
-    console.log('asdfadfsadfadsf');
     request({ url: x, json: true, proxy: 'http://172.31.1.6:8080/' }, function (err, localres, json) {
-
         if (err) {
             throw err;
         }
         vid = "https://www.youtube.com/watch?v=" + json.items[0].id.videoId;
-        console.log(vid);
-        secondDone = true;
+        callback(vid);
     });
+}
 
-    //retrieving activities
+function getActivities(emotion, callback) {
+     //retrieving activities
+     console.log('getting activities');
+    let act = '', feel = '';
+    if      (emotion == "anger")    { feel = "love";       }
+    else if (emotion == "disgust")  { feel = "art";        }
+    else if (emotion == "fear")     { feel = "management"; }
+    else if (emotion == "joy")      { feel = "life";       }
+    else if (emotion == "sadness")  { feel = "funny";      }
     switch (emotion) {
         case 'anger':
             act = "Go for a jog";
@@ -54,30 +66,16 @@ var recommend = function (emotion) {
             break;
         case 'sadness':
             act = "Dance Dance Dance";
+            break;
         default:
             act = "asdsad";
     }
-    console.log(act);
-    console.log(firstDone);
-    console.log(secondDone);
-
-    setTimeout(function() {
-        
-    }, timeout);
-    //while (firstDone == false || secondDone == false);
-    console.log(firstDone);
-    console.log(secondDone);
-
-    var values = [];
-    values.push(quote);
-    values.push(act);
-    values.push(vid);
-    return (values)
-
+    callback(act);
 }
 
+function test(expr, callback) {
+    console.log('got ' + expr);
+    callback(expr);
+}
 
-
-var a = recommend('fear');
-console.log(a);
-module.exports = { recommend }
+module.exports = { getVideo, getActivities, getQuotes, test };

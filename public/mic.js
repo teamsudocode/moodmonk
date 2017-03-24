@@ -89,7 +89,7 @@ function startListening() {
     }
     listening = true;
     final_transcript = '';
-    recognition.lang = 'en-IN';
+    recognition.lang = currentLanguage;
     recognition.start();
 }
 
@@ -105,7 +105,13 @@ function askWatson(text, callback) {
     if (window.jQuery === undefined) {
         console.log("i need to do ajax. import jquery before me");
     }
-    $.get('/askWatson/'+encodeURIComponent(text), callback);
+    if (currentLanguage == 'en-IN')
+        $.get('/askWatson/'+encodeURIComponent(text), callback);
+    else if (currentLanguage == 'hi-IN') {
+        $.get('http://api.mymemory.translated.net/get?q='+current_transcript+'&langpair=hi|en', function(data) {
+            console.log(data.responseData.translatedText);
+        });
+    }
 }
 
 var first_char = /\S/;

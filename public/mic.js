@@ -87,7 +87,7 @@ function micClicked(event) {
     try {
         if (en == 1) setLang('en');
         else if (hi == 1) setLang('hi');
-    } catch(e) {}
+    } catch (e) {}
     startListening();
 }
 
@@ -119,6 +119,7 @@ function askWatson(text, callback) {
     else if (currentLanguage == 'hi-IN') {
         $.get('http://api.mymemory.translated.net/get?q='+current_transcript+'&langpair=hi|en', function(data) {
             console.log(data.responseData.translatedText);
+            $.get('/askWatson/'+encodeURIComponent(data.responseData.translatedText), callback);
         });
     }
 }

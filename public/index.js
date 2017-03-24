@@ -9,10 +9,10 @@ var begin = function () {
 
 var close = function () {
     "use strict";
-    document.getElementById("controls").className="animated fadeOut";
+    document.getElementById("controls").className = "animated fadeOut";
     document.getElementById("contentwrap").className = "animated flipInX";
     document.getElementById("close").className = "animated fadeOut";
-    document.getElementById("Clouds").className = "block";
+    document.getElementById("Clouds").className = "visible";
     document.getElementById("mic").className = "animated fadeOutDownBig";
     document.body.style.backgroundImage = "background-image: radial-gradient(circle, #00b5ff 0%, #26b2fa 70%, #1fd2fb 100%)";
     try {
@@ -62,9 +62,9 @@ var change = function (mood) {
     document.getElementById('word').style.color = textcolor;
     document.getElementById('word').className = "animated zoomIn";
     document.getElementById('word').style.opacity = 0;
-    setTimeout(function(){
-        $( "#word" ).remove();
-    },2000);
+    setTimeout(function () {
+        $("#word").remove();
+    }, 2000);
 };
 
 document.getElementById("start").addEventListener('click', begin);
@@ -72,8 +72,19 @@ document.getElementById("close").addEventListener('click', close);
 
 var ctr = 0;
 document.getElementById("mic").onclick = function () {
-    document.getElementById("controls").className="animated fadeInUpBig";
+    document.getElementById("controls").className = "animated fadeInUpBig";
     ctr = (ctr + 1) % 2;
     if (ctr == 0)
         micClicked();
 };
+
+document.getElementById("result").onclick = function () {
+    document.getElementById("mic").className="hidden";
+    document.getElementById("close").className="hidden";
+    document.getElementById("logomark").className="hidden";
+    document.getElementById("result").classList="hidden";
+    document.getElementById("loading").className = "visible";
+    document.getElementById("loading2").className = "visible";
+    document.getElementById("Clouds").style.display="block";
+    setTimeout(function () { window.location = 'result.html'}, 5000);
+}

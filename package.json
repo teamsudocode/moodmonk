@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.2",
-    "watson-developer-cloud": "^2.27.0"
+    "request": "^2.81.0"
   }
 }

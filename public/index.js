@@ -14,27 +14,36 @@ var close = function () {
     document.getElementById("Clouds").className = "block";
     document.getElementById("mic").className = "animated fadeOutDownBig";
     document.body.style.backgroundImage = "background-image: radial-gradient(circle, #00b5ff 0%, #26b2fa 70%, #1fd2fb 100%)";
+    try {
+        if (listening) stopListening();
+    } catch (e) {}
 };
 
 var change = function (mood) {
     "use strict";
+    console.log('changing to ' + mood);
     let moodcolor,textcolor;
     switch (mood) {
-        case ("anger"):
-            moodcolor = "#e53935";
-            textcolor = "white";
-        case ("disgust"):
-            moodcolor = "#2e7d32";
-            textcolor = "white";
-        case ("fear"):
-            moodcolor = "#5e35b1";
-            textcolor = "white";
-        case ("joy"):
-            moodcolor = "#ffeb3b";
-            textcolor = "black";
-        case ("sadness"):
-            moodcolor = "#0d47a1";
-            textcolor = "white";
+    case ("anger"):
+        moodcolor = "#e53935";
+        textcolor = "white";
+        break;
+    case ("disgust"):
+        moodcolor = "#2e7d32";
+        textcolor = "white";
+        break;
+    case ("fear"):
+        moodcolor = "#5e35b1";
+        textcolor = "white";
+        break;
+    case ("joy"):
+        moodcolor = "#ffeb3b";
+        textcolor = "black";
+        break;
+    case ("sadness"):
+        moodcolor = "#0d47a1";
+        textcolor = "white";
+        break;
     }
     var html = document.getElementsByTagName('html')[0];
     html.style.setProperty("--bgcolor", moodcolor);
@@ -53,4 +62,3 @@ document.getElementById("mic").onclick = function () {
     if (ctr == 0)
         micClicked();
 };
-module.exports = { change };

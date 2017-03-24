@@ -21,6 +21,10 @@ $.get("/logger/day/3-24-2017", function (data) {
     }
     console.log(data.social_tone.openness)
     var chart1 = c3.generate({
+        size: {
+            width: 220,
+            height: 220
+        },
         bindto: '#g1',
         data: {
             // iris data from R
@@ -104,6 +108,10 @@ $.get("/logger/day/3-24-2017", function (data) {
     }, 2500);
 
     var chart3 = c3.generate({
+        size: {
+            width: 230,
+            height: 230
+        },
         bindto: '#g3',
         data: {
             // iris data from R

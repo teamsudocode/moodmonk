@@ -27,3 +27,9 @@ var close = function () {
 document.getElementById("start").addEventListener('click', begin);
 document.getElementById("close").addEventListener('click', close);
 
+var ctr = 0;
+document.getElementById("mic").onclick = function() {
+    ctr = (ctr + 1) % 2;
+    if (ctr == 0)
+        micClicked();
+};

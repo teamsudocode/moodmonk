@@ -1,4 +1,13 @@
-$.get("/logger/day/3-24-2017", function (data) {
+function getDateKey() {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    let yyyy = today.getFullYear();
+    return mm+'-'+dd+'-'+yyyy;
+}
+
+var dati = getDateKey();
+$.get("/logger/day/"+ dati, function (data) {
     document.getElementById("moodi").innerHTML = stringi();
     function stringi() {
         let max = Math.max(data.emotion_tone.anger, data.emotion_tone.disgust, data.emotion_tone.fear, data.emotion_tone.sadness, data.emotion_tone.joy);

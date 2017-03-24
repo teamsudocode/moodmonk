@@ -1,13 +1,13 @@
 function getDateKey() {
     let today = new Date();
     let dd = today.getDate();
-    let mm = today.getMonth()+1; //January is 0!
+    let mm = today.getMonth() + 1; //January is 0!
     let yyyy = today.getFullYear();
-    return mm+'-'+dd+'-'+yyyy;
+    return mm + '-' + dd + '-' + yyyy;
 }
 
 var dati = getDateKey();
-$.get("/logger/day/"+ dati, function (data) {
+$.get("/logger/day/3-24-2017", function (data) {
     document.getElementById("moodi").innerHTML = stringi();
     function stringi() {
         let max = Math.max(data.emotion_tone.anger, data.emotion_tone.disgust, data.emotion_tone.fear, data.emotion_tone.sadness, data.emotion_tone.joy);
@@ -30,16 +30,11 @@ $.get("/logger/day/"+ dati, function (data) {
     }
     console.log(data.social_tone.openness)
     var chart1 = c3.generate({
-        size: {
-            width: 220,
-            height: 220
-        },
         bindto: '#g1',
         data: {
             // iris data from R
             columns: [
-                ['data1', 30],
-                ['data2', 120],
+                
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -51,29 +46,60 @@ $.get("/logger/day/"+ dati, function (data) {
             onmouseout: function (d, i) {
                 console.log("onmouseout", d, i);
             }
+        },
+        color: {
+            pattern: ['#0d47a1', '#1976d2', '#2196f3', '#64b5f6', '#bbdefb']
+        },
+        pie: {
+            label: {
+                format: function (value, ratio, id) {
+
+                }
+            }
         }
     });
 
-    setTimeout(function () {
+    let updateSpeed = 500;
+    setTimeout(function() {
         chart1.load({
             columns: [
-                ["anger", data.emotion_tone.anger],
-                ["disgust", data.emotion_tone.disgust],
+                ["anger", data.emotion_tone.anger]
+            ]
+        });
+    }, updateSpeed*1);
+
+    setTimeout(function() {
+        chart1.load({
+            columns: [
                 ["fear", data.emotion_tone.fear],
+            ]
+        });
+    }, updateSpeed*2);
+
+    setTimeout(function() {
+        chart1.load({
+            columns: [
                 ["sadness", data.emotion_tone.sadness],
+            ]
+        });
+    }, updateSpeed*3);
+
+    setTimeout(function() {
+        chart1.load({
+            columns: [
+                ["disgust", data.emotion_tone.disgust],
+            ]
+        });
+    }, updateSpeed*4);
+
+    setTimeout(function() {
+        chart1.load({
+            columns: [
                 ["joy", data.emotion_tone.joy],
             ]
         });
-    }, 1500);
+    }, updateSpeed*5);
 
-    setTimeout(function () {
-        chart1.unload({
-            ids: 'data1'
-        });
-        chart1.unload({
-            ids: 'data2'
-        });
-    }, 2500);
 
 
     var chart2 = c3.generate({
@@ -81,8 +107,7 @@ $.get("/logger/day/"+ dati, function (data) {
         data: {
             // iris data from R
             columns: [
-                ['data1', 30],
-                ['data2', 120],
+                
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -94,39 +119,48 @@ $.get("/logger/day/"+ dati, function (data) {
             onmouseout: function (d, i) {
                 console.log("onmouseout", d, i);
             }
+        },
+        color: {
+            pattern: ['#0d47a1', '#1976d2', '#2196f3', '#64b5f6', '#bbdefb']
+        },
+        pie: {
+            label: {
+                format: function (value, ratio, id) {
+
+                }
+            }
         }
     });
+
+    setTimeout(() => {
+        chart2.load({
+            columns: [ [ "analytical", data.language_tone.analytical ]]
+        });
+    }, updateSpeed*1);
+
+    setTimeout(() => {
+        chart2.load({
+            columns: [
+                ["confident", data.language_tone.confident]
+            ] 
+        });
+    }, updateSpeed*2);
 
     setTimeout(function () {
         chart2.load({
             columns: [
-                ["analytical", data.language_tone.analytical],
-                ["confident", data.language_tone.confident],
-                ["tentative", data.language_tone.tentative],
+                ["tentative", data.language_tone.tentative]
             ]
         });
-    }, 1500);
+    }, updateSpeed*3);
 
-    setTimeout(function () {
-        chart2.unload({
-            ids: 'data1'
-        });
-        chart2.unload({
-            ids: 'data2'
-        });
-    }, 2500);
 
     var chart3 = c3.generate({
-        size: {
-            width: 230,
-            height: 230
-        },
         bindto: '#g3',
         data: {
             // iris data from R
             columns: [
-                ['data1', 30],
-                ['data2', 120],
+                
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -137,6 +171,16 @@ $.get("/logger/day/"+ dati, function (data) {
             },
             onmouseout: function (d, i) {
                 console.log("onmouseout", d, i);
+            }
+        },
+        color: {
+            pattern: ['#0d47a1', '#1976d2', '#2196f3', '#64b5f6', '#bbdefb']
+        },
+        pie: {
+            label: {
+                format: function (value, ratio, id) {
+
+                }
             }
         }
     });
@@ -144,32 +188,49 @@ $.get("/logger/day/"+ dati, function (data) {
     setTimeout(function () {
         chart3.load({
             columns: [
-                ["openness", data.social_tone.openness],
-                ["conscientiousness", data.social_tone.conscientiousness],
-                ["extraversion", data.social_tone.extraversion],
-                ["agreableness", data.social_tone.agreableness],
+                ["openness", data.social_tone.openness]
+            ]
+        });
+    }, updateSpeed*1);
+
+    setTimeout(function () {
+        chart3.load({
+            columns: [
+                ["conscientiousness", data.social_tone.conscientiousness]
+            ]
+        });
+    }, updateSpeed*2);
+
+    setTimeout(function () {
+        chart3.load({
+            columns: [
+                ["extraversion", data.social_tone.extraversion]
+            ]
+        });
+    }, updateSpeed*3);
+
+    setTimeout(function () {
+        chart3.load({
+            columns: [
+                ["agreableness", data.social_tone.agreableness]
+            ]
+        });
+    }, updateSpeed*4);
+
+    setTimeout(function () {
+        chart3.load({
+            columns: [
                 ["emotional range", data.social_tone.emotional_range],
             ]
         });
-    }, 1500);
+    }, updateSpeed*5);
 
-    setTimeout(function () {
-        chart3.unload({
-            ids: 'data1'
-        });
-        chart3.unload({
-            ids: 'data2'
-        });
-    }, 2500);
 
     var chart5 = c3.generate({
         bindto: '#gl1',
         data: {
             columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 130, 100, 140, 200, 150, 50],
-                ['data3', 10, 10, 10, 20, 150, 50],
-
+                ['farji', 20, 30, 50, 80]
             ],
             type: 'spline'
         }

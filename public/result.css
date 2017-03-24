@@ -38,13 +38,13 @@ html {
 #g1,
 #g2,
 #g3 {
-    height: 200px;
+    height: 300px;
     display: block;
 }
 
-#gl1{
+#gl1 {
     width: 100%;
-    height: 200px;
+    height: 300px;
     display: block;
     margin-top: 40px;
 }
@@ -58,7 +58,7 @@ html {
     font-size: 1.8vw;
     font-family: 'Oswald', sans-serif;
     background-color: #e3f2fd;
-    border-left: 4px solid #90caf9 ;
+    border-left: 4px solid #90caf9;
     color: black;
 }
 
@@ -67,12 +67,12 @@ html {
     font-family: 'Didact Gothic', sans-serif;
 }
 
-
-#lorem{
+#lorem {
     font-family: 'Didact Gothic', sans-serif;
     font-size: 1vw;
     color: lightgrey;
 }
-#moodi{
-  color: orange;
+
+#moodi {
+    color: orange;
 }

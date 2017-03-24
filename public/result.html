@@ -12,52 +12,54 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="col s7" id="grapharea">
+    <div class="row" id="master">
+        <div class="col l9" id="grapharea">
             <div class="row">
-                <div class="col s12" id="l0">Your Mood today is <span id="moodi">Happy</span></div>
-                <div class="col s12" id="lorem">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</div>
+                <div class="col l12" id="l0">Your Mood today is <span id="moodi"></span></div>
+                <div class="col l12" id="lorem">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named
+                    Duden flows by their place and supplies it with the necessary regelialia.</div>
             </div>
             <div class="row">
                 <div class="col s12 hl" id="l1">Detailed Report</div>
             </div>
             <div class="row">
-                <div class="col s4" id="g1"></div>
-                <div class="col s4" id="g2"></div>
-                <div class="col s4" id="g3"></div>
+                <div class="col l4" id="g1"></div>
+                <div class="col l4" id="g2"></div>
+                <div class="col l4" id="g3"></div>
             </div>
             <div class="row">
-                <div class="col s12" id="gl1"></div>
+                <div class="col l12" id="gl1"></div>
             </div>
         </div>
-        <div class="col s5" id="suggarea">
+        <div class="col l3" id="suggarea">
             <div class="row">
-                <div class="col s12 hl" id="l2">You can try these stuff to feel better</div>
+                <div class="col l12 hl" id="l2">You can try these stuff to feel better</div>
             </div>
             <div class="card-panel white" id="sug1">
                 <div class="cardhead">
-                    <i class="material-icons blue-text">library_music</i>
-                    <span class="black-text">Listen to Some Music</span>
+                    <i class="material-icons blue-text">favorite</i>
+                    <span class="black-text">Golden Quote for you</span>
                 </div>
                 <br>
-                <div class="mainlink"><a href="https://www.youtube.com/watch?v=PT2_F-1esPk" id="link">The Chainsmokers - Closer (Lyric) ft. Halsey</a> <a class="more" id="moresongs">More songs</a></div>
-                <ul id="songslist" class="hidden">
-                    <li><a href="https://www.youtube.com/watch?v=PT2_F-1esPk">The Chainsmokers - Closer (Lyric) ft. Halsey</a></li>
-                    <li><a href="https://www.youtube.com/watch?v=PT2_F-1esPk">The Chainsmokers - Closer (Lyric) ft. Halsey</a></li>
-                    <li><a href="https://www.youtube.com/watch?v=PT2_F-1esPk">The Chainsmokers - Closer (Lyric) ft. Halsey</a></li>
-                </ul>
+                <div class="mainlink"><a href="" id="qlink">Anger is an acid that can do more harm to the vessel in which it is stored than to anything on which it is poured</a></div>
             </div>
             <div class="card-panel white" id="sug1">
                 <div class="cardhead">
                     <i class="material-icons blue-text">videocam</i>
-                    <span class="black-text">Watch Movies</span>
+                    <span class="black-text">Watch a Video</span>
                 </div>
                 <br>
-                <div class="mainlink"><a href="http://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2398042102&pf_rd_r=0VG0P69A8A5H1M4G91HW&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1" id="link">The Shawshank Redemption</a> <a class="more" id="moresongs">More movies</a></div>
-                <ul id="songslist" class="hidden">
-                    <li><a href="http://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2398042102&pf_rd_r=0VG0P69A8A5H1M4G91HW&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1">The Shawshank Redemption</a></li>
-                    <li><a href="http://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2398042102&pf_rd_r=0VG0P69A8A5H1M4G91HW&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1">The Shawshank Redemption</a></li>
-                    <li><a href="http://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2398042102&pf_rd_r=0VG0P69A8A5H1M4G91HW&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1">The Shawshank Redemption</a></li>
+                <div class="mainlink"><a href="" id="vlink">The Shawshank Redemption</a>
+                </div>
+            </div>
+            <div class="card-panel white" id="sug1">
+                <div class="cardhead">
+                    <i class="material-icons blue-text">directions_walk</i>
+                    <span class="black-text">Suggested Activities</span>
+                </div>
+                <br>
+                <div class="mainlink"><a href="" id="vlink">Go For a Walk.</a>
+                </div>
             </div>
         </div>
     </div>
@@ -80,7 +82,6 @@
         for (var i = 0; i < jsList.length; i++) {
             loadJsFile(jsList[i], false);
         }
-
     </script>
 </body>
 

@@ -88,6 +88,32 @@ function getDataByDate(date) {
     return retvalue;
 }
 
+
+function getDataBetweenDates(from, to) {
+    let currentJson = null;
+    let fromYear = parseInt(from.split('-')[2]), toYear = parseInt(to.split('-')[2]);
+    let fromMonth = parseInt(from.split('-')[0]), toMonth = parseInt(to.split('-')[0]);
+    let fromDay = parseInt(from.split('-')[1]), toDay = parseInt(to.split('-')[1]);
+
+    let responseJson = {};
+
+    for (let year = fromYear; year <= toYear; year++) {
+        for (let month = fromMonth; month <= toMonth; month++) {
+            for (day = fromDay; day <= fromDay; day++) {
+
+                let dateKey = month+'-'+day+'-'+year;
+                currentJson = getDataByDate(dateKey);
+                if (currentJson != '404') {
+                    responseJson[dateKey] = currentJson;
+                }
+
+            }
+        }
+    }
+    return responseJson;
+}
+
+
 function analyzer(data){
     let emotions = ['anger', 'disgust', 'fear', 'sadness', 'joy'];
     for (let i in data){
@@ -98,7 +124,8 @@ var logger = {
     'analyzer': analyzer,
     'dominantEmotion': dominantEmotion,
     'log': log,
-    'getByDate': getDataByDate
+    'getByDate': getDataByDate,
+    'getBetweenDates': getDataBetweenDates
 };
 
 module.exports = { logger };

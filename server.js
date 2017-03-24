@@ -12,15 +12,14 @@ app.use(express.static('public'));
 
 /*routes*/
 
-app.get('/text/:id', function (req, res) {
+app.get('/askWatson/:query', function (req, res) {
 
-    console.log(req.params.id);
+    console.log(req.params.query);
     function myCallback(retvalue) {
         console.log('received response');
         logger.log(retvalue);
-        res.send("ok");
+        res.send(logger.dominantEmotion(retvalue));
         console.log('response sent to client');
     };
-    tone(req.params.id, myCallback);
+    tone(req.params.query, myCallback);
 });
-

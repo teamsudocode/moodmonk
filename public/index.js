@@ -9,6 +9,7 @@ var begin = function () {
 
 var close = function () {
     "use strict";
+    document.getElementById("controls").className="animated fadeOut";
     document.getElementById("contentwrap").className = "animated flipInX";
     document.getElementById("close").className = "animated fadeOut";
     document.getElementById("Clouds").className = "block";
@@ -71,6 +72,7 @@ document.getElementById("close").addEventListener('click', close);
 
 var ctr = 0;
 document.getElementById("mic").onclick = function () {
+    document.getElementById("controls").className="animated fadeInUpBig";
     ctr = (ctr + 1) % 2;
     if (ctr == 0)
         micClicked();

@@ -45,14 +45,6 @@ button {
     transition-timing-function: ease-out;
 }
 
-.hidden {
-    display: none;
-}
-
-.visible {
-    display: block;
-}
-
 .purehidden {
     opacity: 0;
 }
@@ -168,10 +160,6 @@ button:focus {
 
 /*mic*/
 
-.hidden {
-    display: none;
-}
-
 .frame {
     position: absolute;
     top: 50%;
@@ -266,7 +254,7 @@ button:focus {
     top: 7px;
     left: 9px;
     background: var(--bgcolor);
-    filter: hue-rotate(175deg);
+    filter: hue-rotate(180deg);
     border-radius: 3px;
 }
 
@@ -422,4 +410,29 @@ button:focus {
     -webkit-transform: translateY(10px);
     transform: translateY(10px);
     /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+#controlwrap {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#cr2>button {
+    margin: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2vw;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
 }

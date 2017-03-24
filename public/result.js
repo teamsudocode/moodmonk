@@ -1,3 +1,4 @@
+var max;
 function getDateKey() {
     let today = new Date();
     let dd = today.getDate();
@@ -10,23 +11,28 @@ var dati = getDateKey();
 $.get("/logger/day/"+ dati, function (data) {
     document.getElementById("moodi").innerHTML = stringi();
     function stringi() {
-        let max = Math.max(data.emotion_tone.anger, data.emotion_tone.disgust, data.emotion_tone.fear, data.emotion_tone.sadness, data.emotion_tone.joy);
+        max = Math.max(data.emotion_tone.anger, data.emotion_tone.disgust, data.emotion_tone.fear, data.emotion_tone.sadness, data.emotion_tone.joy);
         if (max == data.emotion_tone.anger) {
+            carding("anger");
             return "anger";
         }
         if (max == data.emotion_tone.disgust) {
+            carding("disgust");
             return "disgust";
         }
         if (max == data.emotion_tone.fear) {
+            carding("fear");
             return "fear";
         }
         if (max == data.emotion_tone.sadness) {
+            carding("sadness");
             return "sadness";
         }
         if (max == data.emotion_tone.joy) {
+            carding("joy");
             return "joy";
         }
-
+        
     }
     console.log(data.social_tone.openness)
     var chart1 = c3.generate({
@@ -176,3 +182,16 @@ $.get("/logger/day/"+ dati, function (data) {
     });
 
 });
+
+function carding(mood){
+    $.get("/recommend/video/" + mood, function(data){
+        document.getElementById("").innerHTML(data);
+    });
+    $.get("/recommend/quote/" + mood, function(data){
+        document.getElementById("").innerHTML(data);
+    })
+    $.get("/recommend/activity/" + mood, function(data){
+        document.getElementById("").innerHTML(data);
+    })
+}
+

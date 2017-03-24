@@ -37,6 +37,12 @@ button {
     font-family: 'Oswald', sans-serif;
     font-size: 10em;
     text-align: center;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transition-property: all;
+    animation-duration: 2.69s;
+    transition-timing-function: ease-out;
 }
 
 .hidden {
@@ -259,7 +265,7 @@ button:focus {
     height: 16px;
     top: 7px;
     left: 9px;
-    background: #26b2fa;
+    background: var(--bgcolor);
     filter: hue-rotate(175deg);
     border-radius: 3px;
 }

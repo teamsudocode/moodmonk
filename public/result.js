@@ -249,20 +249,20 @@ function c4 (p, n, x1) {
         }
     });
 }
-// function carding(mood){
-//     console.log(mood);
-//     $.get("/recommend/video/" + mood, function(data){
-//         document.getElementById("vlink").innerHTML = data;
-//         document.getElementById("vlink").href = data;
-//     });
-//     $.get("/recommend/quote/" + mood, function(data){
-//         console.log(data);
-//         document.getElementById("qlink").innerHTML = data;
-//     });
-//     $.get("/recommend/activity/" + mood, function(data){
-//         document.getElementById("actlink").innerHTML = data;
-//     });
-// }
+function carding(mood){
+    console.log(mood);
+    $.get("/recommend/video/" + mood, function(data){
+        document.getElementById("vlink").innerHTML = data;
+        document.getElementById("vlink").href = data;
+    });
+    $.get("/recommend/quote/" + mood, function(data){
+        console.log(data);
+        document.getElementById("qlink").innerHTML = data;
+    });
+    $.get("/recommend/activity/" + mood, function(data){
+        document.getElementById("actlink").innerHTML = data;
+    });
+}
 
 Date.prototype.addDays = function(days) {
     var dat = new Date(this.valueOf());

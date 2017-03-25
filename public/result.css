@@ -76,3 +76,8 @@ html {
 #moodi {
     color: orange;
 }
+
+.descriptors {
+    text-align: center;
+    font-weight: bold;
+}

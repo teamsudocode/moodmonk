@@ -1,15 +1,14 @@
 var max;
-function getDateKey() {
-    let today = new Date();
+function getDateKey(today) {
     let dd = today.getDate();
     let mm = today.getMonth() + 1; //January is 0!
     let yyyy = today.getFullYear();
     return mm + '-' + dd + '-' + yyyy;
 }
 
-var dati = getDateKey();
+var dati = getDateKey(new Date());
 $.get("/logger/day/3-24-2017", function (data) {
-    document.getElementById("moodi").innerHTML = stringi();
+    // document.getElementById("moodi").innerHTML = stringi();
     function stringi() {
         max = Math.max(data.emotion_tone.anger, data.emotion_tone.disgust, data.emotion_tone.fear, data.emotion_tone.sadness, data.emotion_tone.joy);
         if (max == data.emotion_tone.anger) {
@@ -32,15 +31,15 @@ $.get("/logger/day/3-24-2017", function (data) {
             carding("joy");
             return "joy";
         }
-        
+        return null;
     }
-    console.log(data.social_tone.openness)
+    console.log(data.social_tone.openness);
     var chart1 = c3.generate({
         bindto: '#g1',
         data: {
             // iris data from R
             columns: [
-                
+
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -69,15 +68,14 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function() {
         chart1.load({
             columns: [
-                ["anger", data.emotion_tone.anger]
-            ]
+                ["anger", data.emotion_tone.anger.toFixed(3) ] ]
         });
     }, updateSpeed*1);
 
     setTimeout(function() {
         chart1.load({
             columns: [
-                ["fear", data.emotion_tone.fear],
+                [ "fear", data.emotion_tone.fear.toFixed(3) ]
             ]
         });
     }, updateSpeed*2);
@@ -85,7 +83,7 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function() {
         chart1.load({
             columns: [
-                ["sadness", data.emotion_tone.sadness],
+                ["sadness", data.emotion_tone.sadness.toFixed(3) ],
             ]
         });
     }, updateSpeed*3);
@@ -93,7 +91,7 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function() {
         chart1.load({
             columns: [
-                ["disgust", data.emotion_tone.disgust],
+                ["disgust", data.emotion_tone.disgust.toFixed(3) ],
             ]
         });
     }, updateSpeed*4);
@@ -101,7 +99,7 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function() {
         chart1.load({
             columns: [
-                ["joy", data.emotion_tone.joy],
+                ["joy", data.emotion_tone.joy.toFixed(3) ],
             ]
         });
     }, updateSpeed*5);
@@ -113,7 +111,7 @@ $.get("/logger/day/3-24-2017", function (data) {
         data: {
             // iris data from R
             columns: [
-                
+
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -140,22 +138,24 @@ $.get("/logger/day/3-24-2017", function (data) {
 
     setTimeout(() => {
         chart2.load({
-            columns: [ [ "analytical", data.language_tone.analytical ]]
+            columns: [
+                [ "analytical", data.language_tone.analytical.toFixed(3) ]
+            ]
         });
     }, updateSpeed*1);
 
     setTimeout(() => {
         chart2.load({
             columns: [
-                ["confident", data.language_tone.confident]
-            ] 
+                ["confident", data.language_tone.confident.toFixed(3) ]
+            ]
         });
     }, updateSpeed*2);
 
     setTimeout(function () {
         chart2.load({
             columns: [
-                ["tentative", data.language_tone.tentative]
+                ["tentative", data.language_tone.tentative.toFixed(3) ]
             ]
         });
     }, updateSpeed*3);
@@ -166,7 +166,7 @@ $.get("/logger/day/3-24-2017", function (data) {
         data: {
             // iris data from R
             columns: [
-                
+
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -194,7 +194,7 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function () {
         chart3.load({
             columns: [
-                ["openness", data.social_tone.openness]
+                ["openness", data.social_tone.openness.toFixed(3) ]
             ]
         });
     }, updateSpeed*1);
@@ -202,7 +202,7 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function () {
         chart3.load({
             columns: [
-                ["conscientiousness", data.social_tone.conscientiousness]
+                ["conscientiousness", data.social_tone.conscientiousness.toFixed(3) ]
             ]
         });
     }, updateSpeed*2);
@@ -210,7 +210,7 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function () {
         chart3.load({
             columns: [
-                ["extraversion", data.social_tone.extraversion]
+                ["extraversion", data.social_tone.extraversion.toFixed(3) ]
             ]
         });
     }, updateSpeed*3);
@@ -218,7 +218,7 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function () {
         chart3.load({
             columns: [
-                ["agreableness", data.social_tone.agreableness]
+                ["agreableness", data.social_tone.agreableness.toFixed(3) ]
             ]
         });
     }, updateSpeed*4);
@@ -226,24 +226,29 @@ $.get("/logger/day/3-24-2017", function (data) {
     setTimeout(function () {
         chart3.load({
             columns: [
-                ["emotional range", data.social_tone.emotional_range],
+                ["emotional range", data.social_tone.emotional_range.toFixed(3) ],
             ]
         });
     }, updateSpeed*5);
 
 
+});
+
+function c4 (p, n, x1) {
+
     var chart4 = c3.generate({
         bindto: '#gl1',
         data: {
+            x: 'Date',
             columns: [
-                ['farji', 20, 30, 50, 80]
+                x1,
+                p,
+                n
             ],
             type: 'spline'
         }
     });
-
-});
-
+}
 function carding(mood){
     console.log(mood);
     $.get("/recommend/video/" + mood, function(data){
@@ -253,9 +258,35 @@ function carding(mood){
     $.get("/recommend/quote/" + mood, function(data){
         console.log(data);
         document.getElementById("qlink").innerHTML = data;
-    })
+    });
     $.get("/recommend/activity/" + mood, function(data){
         document.getElementById("actlink").innerHTML = data;
-    })
+    });
 }
 
+Date.prototype.addDays = function(days) {
+    var dat = new Date(this.valueOf());
+    dat.setDate(dat.getDate() + days);
+    return dat;
+};
+
+var dateOneWeekAgo = (new Date()).addDays(-7);
+$.get("/logger/range/"+getDateKey(dateOneWeekAgo)+"/"+dati, function(data) {
+
+    // setting up positive chart
+    var positiveData = ['Positive emotions'];
+    var negativeData = ['Negative emotions'];
+    var xTicks       = ['Date'];
+    console.log(data);
+
+    for (let day in data) {
+        positiveData.push(data[day].emotion_tone.joy.toFixed(3));
+        negativeData.push( (data[day].emotion_tone.sadness + data[day].emotion_tone.fear +
+                            data[day].emotion_tone.disgust + data[day].emotion_tone.sadness).toFixed(3) / (4) );
+        xTicks.push(parseInt(day.substring(2,4)));
+    }
+    console.log(xTicks);
+    console.log(positiveData);
+    console.log(negativeData);
+    c4(positiveData,negativeData, xTicks);
+});

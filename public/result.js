@@ -8,7 +8,7 @@ function getDateKey(today) {
 
 var dati = getDateKey(new Date());
 $.get("/logger/day/3-24-2017", function (data) {
-    // document.getElementById("moodi").innerHTML = stringi();
+    document.getElementById("moodi").innerHTML = stringi();
     function stringi() {
         max = Math.max(data.emotion_tone.anger, data.emotion_tone.disgust, data.emotion_tone.fear, data.emotion_tone.sadness, data.emotion_tone.joy);
         if (max == data.emotion_tone.anger) {

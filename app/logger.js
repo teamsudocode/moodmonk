@@ -58,7 +58,6 @@ function dominantEmotion(json){
 }
 
 function getDataByDate(date) {
-    console.log("finding by date" + date);
     if (!data.hasOwnProperty(date)) {
         return "404";
     }
@@ -88,35 +87,36 @@ function getDataByDate(date) {
 }
 
 
+Date.prototype.addDays = function(days) {
+    var dat = new Date(this.valueOf());
+    dat.setDate(dat.getDate() + days);
+    return dat;
+};
+
+function getDates(startDate, stopDate) {
+    let dateArray = new Array();
+    let currentDate = startDate;
+    while (currentDate <= stopDate) {
+        dateArray.push(currentDate);
+        currentDate = currentDate.addDays(1);
+    }
+    return dateArray;
+}
+
 function getDataBetweenDates(from, to) {
     let currentJson = null;
 
-    Date.prototype.addDays = function(days) {
-        var dat = new Date(this.valueOf());
-        dat.setDate(dat.getDate() + days);
-        return dat;
-    };
-
-    function getDates(startDate, stopDate) {
-        let dateArray = new Array();
-        let currentDate = startDate;
-        while (currentDate <= stopDate) {
-            dateArray.push(currentDate);
-            currentDate = currentDate.addDays(1);
-        }
-        return dateArray;
-    }
-
     let responseJson = {};
+    let dateArray = getDates(new Date(from), new Date(to));
 
-    for (let date in getDates(new Date(from), new Date(to))) {
-        let dateKey = getDateKey(date);
+    for (let i = 0; i < dateArray.length; i++) {
+        let date = dateArray[i];
+        let dateKey = date.getMonth()+1+'-'+date.getDate()+'-'+date.getFullYear();
         let currentJson = getDataByDate(dateKey);
         if (currentJson != '404') {
             responseJson[dateKey] = currentJson;
         }
     }
-
     return responseJson;
 }
 

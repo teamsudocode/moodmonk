@@ -1,15 +1,14 @@
 var max;
-function getDateKey() {
-    let today = new Date();
+function getDateKey(today) {
     let dd = today.getDate();
     let mm = today.getMonth() + 1; //January is 0!
     let yyyy = today.getFullYear();
     return mm + '-' + dd + '-' + yyyy;
 }
 
-var dati = getDateKey();
+var dati = getDateKey(new Date());
 $.get("/logger/day/3-24-2017", function (data) {
-    document.getElementById("moodi").innerHTML = stringi();
+    // document.getElementById("moodi").innerHTML = stringi();
     function stringi() {
         max = Math.max(data.emotion_tone.anger, data.emotion_tone.disgust, data.emotion_tone.fear, data.emotion_tone.sadness, data.emotion_tone.joy);
         if (max == data.emotion_tone.anger) {
@@ -32,15 +31,15 @@ $.get("/logger/day/3-24-2017", function (data) {
             carding("joy");
             return "joy";
         }
-        
+        return null;
     }
-    console.log(data.social_tone.openness)
+    console.log(data.social_tone.openness);
     var chart1 = c3.generate({
         bindto: '#g1',
         data: {
             // iris data from R
             columns: [
-                
+
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -113,7 +112,7 @@ $.get("/logger/day/3-24-2017", function (data) {
         data: {
             // iris data from R
             columns: [
-                
+
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -148,7 +147,7 @@ $.get("/logger/day/3-24-2017", function (data) {
         chart2.load({
             columns: [
                 ["confident", data.language_tone.confident]
-            ] 
+            ]
         });
     }, updateSpeed*2);
 
@@ -166,7 +165,7 @@ $.get("/logger/day/3-24-2017", function (data) {
         data: {
             // iris data from R
             columns: [
-                
+
             ],
             type: 'pie',
             onclick: function (d, i) {
@@ -232,30 +231,60 @@ $.get("/logger/day/3-24-2017", function (data) {
     }, updateSpeed*5);
 
 
+});
+
+function c4 (p, n, x1) {
+
     var chart4 = c3.generate({
         bindto: '#gl1',
         data: {
+            x: 'Date',
             columns: [
-                ['farji', 20, 30, 50, 80]
+                x1,
+                p,
+                n
             ],
             type: 'spline'
         }
     });
-
-});
-
-function carding(mood){
-    console.log(mood);
-    $.get("/recommend/video/" + mood, function(data){
-        document.getElementById("vlink").innerHTML = data;
-        document.getElementById("vlink").href = data;
-    });
-    $.get("/recommend/quote/" + mood, function(data){
-        console.log(data);
-        document.getElementById("qlink").innerHTML = data;
-    })
-    $.get("/recommend/activity/" + mood, function(data){
-        document.getElementById("actlink").innerHTML = data;
-    })
 }
+// function carding(mood){
+//     console.log(mood);
+//     $.get("/recommend/video/" + mood, function(data){
+//         document.getElementById("vlink").innerHTML = data;
+//         document.getElementById("vlink").href = data;
+//     });
+//     $.get("/recommend/quote/" + mood, function(data){
+//         console.log(data);
+//         document.getElementById("qlink").innerHTML = data;
+//     });
+//     $.get("/recommend/activity/" + mood, function(data){
+//         document.getElementById("actlink").innerHTML = data;
+//     });
+// }
 
+Date.prototype.addDays = function(days) {
+    var dat = new Date(this.valueOf());
+    dat.setDate(dat.getDate() + days);
+    return dat;
+};
+
+var dateOneWeekAgo = (new Date()).addDays(-7);
+$.get("/logger/range/"+getDateKey(dateOneWeekAgo)+"/"+dati, function(data) {
+
+    // setting up positive chart
+    var positiveData = ['Positive emotions'];
+    var negativeData = ['Negative emotions'];
+    var xTicks       = ['Date'];
+
+    for (let day in data) {
+        positiveData.push(data[day].emotion_tone.joy);
+        negativeData.push(data[day].emotion_tone.sadness); //+ data[day].emotion_tone.fear +
+                          //data[day].emotion_tone.disgust + data[day].emotion_tone.sadness);
+        xTicks.push(parseInt(day.substring(2,4)));
+    }
+    console.log(xTicks);
+    console.log(positiveData);
+    console.log(negativeData);
+    c4(positiveData,negativeData, xTicks);
+});

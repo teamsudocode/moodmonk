@@ -17,7 +17,7 @@ function getQuotes(emotion, callback) {
     console.log('getting quotes');
     r('http://quotes.rest/qod.json?category=' + feel, function (error, response, body) {
         let json = JSON.parse(body);
-        let quote = json;//contents.quotes[0].quote; // quote
+        let quote = json.contents.quotes[0].quote; // quote
         callback(quote);
     });
 }

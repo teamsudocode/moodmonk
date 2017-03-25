@@ -1,6 +1,6 @@
 // const anondataFile = '../data/anonymous.json';
 // const dataFileName = '../data/data.json';
-const dataFileName = "/home/himanshu/development/github/moodmonk/data/data.json";
+const dataFileName = "../data/data.json";
 
 var data = require(dataFileName);
 var fs = require("fs");

@@ -4,7 +4,7 @@ var r = request.defaults({ 'proxy': 'http://172.31.1.6:8080/' });
 var google = require('googleapis');
 google.options({ proxy: 'http://172.31.1.6:8080/' });
 
-var youtube = google.youtube({ version: 'v3', auth: 'AIzaSyAoN1RLSoqgf7ujPK-2cfT8pz4qQR1_tvg' });
+var youtube = google.youtube({ version: 'v3', auth: 'API_KEY' });
 
 function getQuotes(emotion, callback) {
     //retrieving quotes

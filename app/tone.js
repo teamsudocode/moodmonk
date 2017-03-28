@@ -13,8 +13,8 @@ var options = {
     headers: headers,
     body: dataString,
     auth: {
-        'username' : "f4dc0523-93cd-445a-8bda-34396663adba",
-        'pass': 'z3MgWVkuEvOd'
+        'username' : "USERNAME_FROM_WATSON",
+        'pass': 'PASSWORD_FROM_WATSON'
     }
 };
 

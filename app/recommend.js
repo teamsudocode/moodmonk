@@ -1,3 +1,4 @@
+'use strict';
 var request = require('request');
 var r = request.defaults({ 'proxy': 'http://172.31.1.6:8080/' });
 

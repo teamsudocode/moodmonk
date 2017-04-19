@@ -1,3 +1,4 @@
+'use strict';
 // const anondataFile = '../data/anonymous.json';
 // const dataFileName = '../data/data.json';
 const dataFileName = __dirname+"/../data/data.json";

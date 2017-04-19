@@ -8,6 +8,29 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lora:400i|Quicksand|Oswald|Text+Me+One" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <style>
+        form div {
+            margin-top: 10px;
+        }
+        form div input {
+            border-radius: 3px;
+            padding: 5px;
+        }
+        form div button {
+            padding: 5px;
+            cursor: pointer;
+            background-color: transparent;
+            border-radius: 4px;
+            border-color: white;
+            border: 1px solid white;
+            color: white;
+            font-size: 1.2em;
+        }
+        form div button:hover {
+            border: 3px solid white;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,6 +60,29 @@
             <div>L</div>
         </div>
     </div>
+
+<% if (!loggedIn) { %>
+    <center style="position: absolute; margin-top: 25vh; width: 100vw;">
+    <% if (failed) { %>
+        Incorrect userid/password.
+    <% } %>
+    <form action="/login" method="post">
+        <div>
+            <input type="text" name="userid" placeholder="Username">
+        </div>
+        <div>
+            <input type="password" name="password"  placeholder="Password">
+        </div>
+        <div>
+            <button>Login</button>
+        </div>
+    </center>
+    </form>
+
+<% } %>
+
+<% if (loggedIn) { %>
+
     <!--Welcome Message-->
     <div id="contentwrap">
         <div id="welcome">
@@ -121,6 +167,8 @@
     </svg>
     <script src="mic.js"></script>
     <script src="index.js"></script>
+
+<% } %>
 </body>
 
 </html>

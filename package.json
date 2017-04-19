@@ -9,8 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.6",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "googleapis": "^18.0.0",
+    "md5": "^2.2.1",
     "mysql": "^2.13.0",
     "request": "^2.81.0"
   }

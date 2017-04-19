@@ -137,6 +137,34 @@ function clone(obj) {
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
 
+function setEmotionTone(jsonobject, callback) {
+    connection.query('INSERT INTO emotion_tone SET ?', jsonobject ,function (err, rows, fields) {
+        if (err) 
+            callback(false);
+        console.log('Inserted in EmotionTone Table');
+        callback(true);
+    });
+};
+
+function setLanguageTone(jsonobject, callback) {
+    connection.query('INSERT INTO language_tone SET ?', jsonobject ,function (err, rows, fields) {
+        if (err) 
+            callback(false);
+        console.log('Inserted in LanguageTone Table');
+        callback(true);
+    });
+};
+
+function setSocialTone(jsonobject, callback) {
+    connection.query('INSERT INTO social_tone SET ?', jsonobject ,function (err, rows, fields) {
+        if (err) 
+            callback(false);
+        console.log('Inserted in SocialTone Table');
+        callback(true);
+    });
+};
+
+
 function getEmotionTone(Userid, Date, callback) {
     connection.query('SELECT * FROM emotion_tone WHERE userid = ? AND date = ?', [ Userid, Date] ,function (err, rows, fields) {
         if (err) 
@@ -188,5 +216,8 @@ module.exports = {
     getEmotionTone,
     getLanguageTone,
     getSocialTone,
+    setEmotionTone,
+    setLanguageTone,
+    setSocialTone,
     stopApp
 }

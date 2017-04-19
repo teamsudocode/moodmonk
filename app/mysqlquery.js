@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'password',
+    password: 'iiita123',
     database: 'moodmonk'
 });
 
@@ -20,27 +20,27 @@ connection.connect(function (err) {
 var emotionTemplate = {
 "tones": [
         {
-        "score": 0.52071,
+        "score": 0.00,
         "tone_id": "anger",
         "tone_name": "Anger"
         },
         {
-        "score": 0.086613,
+        "score": 0.00,
         "tone_id": "disgust",
         "tone_name": "Disgust"
         },
         {
-        "score": 0.1711,
+        "score": 0.00,
         "tone_id": "fear",
         "tone_name": "Fear"
         },
         {
-        "score": 0.116554,
+        "score": 0.00,
         "tone_id": "joy",
         "tone_name": "Joy"
         },
         {
-        "score": 0.636207,
+        "score": 0.00,
         "tone_id": "sadness",
         "tone_name": "Sadness"
         }
@@ -52,17 +52,17 @@ var emotionTemplate = {
 var languageTemplate = {
         "tones": [
           {
-            "score": 0.306013,
+            "score": 0.00,
             "tone_id": "analytical",
             "tone_name": "Analytical"
           },
           {
-            "score": 0,
+            "score": 0.00,
             "tone_id": "confident",
             "tone_name": "Confident"
           },
           {
-            "score": 0.70327,
+            "score": 0.00,
             "tone_id": "tentative",
             "tone_name": "Tentative"
           }
@@ -74,27 +74,27 @@ var languageTemplate = {
 var socialTemplate = {
         "tones": [
           {
-            "score": 0.195074,
+            "score": 0.00,
             "tone_id": "openness_big5",
             "tone_name": "Openness"
           },
           {
-            "score": 0.631838,
+            "score": 0.00,
             "tone_id": "conscientiousness_big5",
             "tone_name": "Conscientiousness"
           },
           {
-            "score": 0.977727,
+            "score": 0.00,
             "tone_id": "extraversion_big5",
             "tone_name": "Extraversion"
           },
           {
-            "score": 0.939484,
+            "score": 0.00,
             "tone_id": "agreeableness_big5",
             "tone_name": "Agreeableness"
           },
           {
-            "score": 0.778736,
+            "score": 0.00,
             "tone_id": "emotional_range_big5",
             "tone_name": "Emotional Range"
           }
@@ -139,7 +139,7 @@ function clone(obj) {
 
 function setEmotionTone(jsonobject, callback) {
     connection.query('INSERT INTO emotion_tone SET ?', jsonobject ,function (err, rows, fields) {
-        if (err) 
+        if (err)
             callback(false);
         console.log('Inserted in EmotionTone Table');
         callback(true);
@@ -148,7 +148,7 @@ function setEmotionTone(jsonobject, callback) {
 
 function setLanguageTone(jsonobject, callback) {
     connection.query('INSERT INTO language_tone SET ?', jsonobject ,function (err, rows, fields) {
-        if (err) 
+        if (err)
             callback(false);
         console.log('Inserted in LanguageTone Table');
         callback(true);
@@ -157,7 +157,7 @@ function setLanguageTone(jsonobject, callback) {
 
 function setSocialTone(jsonobject, callback) {
     connection.query('INSERT INTO social_tone SET ?', jsonobject ,function (err, rows, fields) {
-        if (err) 
+        if (err)
             callback(false);
         console.log('Inserted in SocialTone Table');
         callback(true);
@@ -167,42 +167,48 @@ function setSocialTone(jsonobject, callback) {
 
 function getEmotionTone(Userid, Date, callback) {
     connection.query('SELECT * FROM emotion_tone WHERE userid = ? AND date = ?', [ Userid, Date] ,function (err, rows, fields) {
-        if (err) 
+        if (err)
             callback(defaultJson.document_tone.tone_categories[0]);
         let x = clone(emotionTemplate);
-        x.tones[0].score = rows[0].anger;
-        x.tones[1].score = rows[0].disgust;
-        x.tones[2].score = rows[0].fear;
-        x.tones[3].score = rows[0].joy;
-        x.tones[4].score = rows[0].sadness;
+        if (rows.length > 0) {
+            x.tones[0].score = rows[0].anger;
+            x.tones[1].score = rows[0].disgust;
+            x.tones[2].score = rows[0].fear;
+            x.tones[3].score = rows[0].joy;
+            x.tones[4].score = rows[0].sadness;
+        }
         console.log(x);
         callback(x);
     });
 };
 
-function getLanguageTone(userid, date, callback) {
+function getLanguageTone(Userid, Date, callback) {
     connection.query('SELECT * FROM language_tone WHERE userid = ? AND date = ?', [ Userid, Date] ,function (err, rows, fields) {
-        if (err) 
+        if (err)
             callback(defaultJson.document_tone.tone_categories[0]);
         let x = clone(languageTemplate);
-        x.tones[0].score = rows[0].analytical;
-        x.tones[1].score = rows[0].confident;
-        x.tones[2].score = rows[0].tentative;
+        for (let i = 0; i < rows.length; i++) {
+                x.tones[0].score = rows[0].analytical;
+                x.tones[1].score = rows[0].confident;
+                x.tones[2].score = rows[0].tentative;
+        }
         console.log(x);
         callback(x);
     });
 };
 
-function getSocialTone(userid, date, callback) {
+function getSocialTone(Userid, Date, callback) {
     connection.query('SELECT * FROM social_tone WHERE userid = ? AND date = ?', [ Userid, Date] ,function (err, rows, fields) {
-        if (err) 
+        if (err)
             callback(defaultJson.document_tone.tone_categories[0]);
         let x = clone(socialTemplate);
-        x.tones[0].score = rows[0].openness_big5;
-        x.tones[1].score = rows[0].conscientiousness_big5;
-        x.tones[2].score = rows[0].extraversion_big5;
-        x.tones[3].score = rows[0].agreeableness_big5;
-        x.tones[4].score = rows[0].emotional_range_big5;
+        if (rows.length > 0) {
+            x.tones[0].score = rows[0].openness_big5;
+            x.tones[1].score = rows[0].conscientiousness_big5;
+            x.tones[2].score = rows[0].extraversion_big5;
+            x.tones[3].score = rows[0].agreeableness_big5;
+            x.tones[4].score = rows[0].emotional_range_big5;
+        }
         console.log(x);
         callback(x);
     });
@@ -220,4 +226,4 @@ module.exports = {
     setLanguageTone,
     setSocialTone,
     stopApp
-}
+};

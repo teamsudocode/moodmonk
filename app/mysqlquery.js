@@ -1,10 +1,11 @@
+'use strict';
 var defaultJson = require(__dirname+'/../response.json');
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'iiita123',
+    password: 'password',
     database: 'moodmonk'
 });
 
@@ -170,12 +171,12 @@ function getEmotionTone(Userid, Date, callback) {
         if (err)
             callback(defaultJson.document_tone.tone_categories[0]);
         let x = clone(emotionTemplate);
-        if (rows.length > 0) {
-            x.tones[0].score = rows[0].anger;
-            x.tones[1].score = rows[0].disgust;
-            x.tones[2].score = rows[0].fear;
-            x.tones[3].score = rows[0].joy;
-            x.tones[4].score = rows[0].sadness;
+        for (let i = 0; i < rows.length; i++) {
+            x.tones[0].score += rows[i].anger;
+            x.tones[1].score += rows[i].disgust;
+            x.tones[2].score += rows[i].fear;
+            x.tones[3].score += rows[i].joy;
+            x.tones[4].score += rows[i].sadness;
         }
         console.log(x);
         callback(x);
@@ -185,12 +186,12 @@ function getEmotionTone(Userid, Date, callback) {
 function getLanguageTone(Userid, Date, callback) {
     connection.query('SELECT * FROM language_tone WHERE userid = ? AND date = ?', [ Userid, Date] ,function (err, rows, fields) {
         if (err)
-            callback(defaultJson.document_tone.tone_categories[0]);
+            callback(defaultJson.dox`cument_tone.tone_categories[0]);
         let x = clone(languageTemplate);
         for (let i = 0; i < rows.length; i++) {
-                x.tones[0].score = rows[0].analytical;
-                x.tones[1].score = rows[0].confident;
-                x.tones[2].score = rows[0].tentative;
+                x.tones[0].score += rows[i].analytical;
+                x.tones[1].score += rows[i].confident;
+                x.tones[2].score += rows[i].tentative;
         }
         console.log(x);
         callback(x);
@@ -202,12 +203,12 @@ function getSocialTone(Userid, Date, callback) {
         if (err)
             callback(defaultJson.document_tone.tone_categories[0]);
         let x = clone(socialTemplate);
-        if (rows.length > 0) {
-            x.tones[0].score = rows[0].openness_big5;
-            x.tones[1].score = rows[0].conscientiousness_big5;
-            x.tones[2].score = rows[0].extraversion_big5;
-            x.tones[3].score = rows[0].agreeableness_big5;
-            x.tones[4].score = rows[0].emotional_range_big5;
+        for (let i = 0; i < rows.length; i++) {
+            x.tones[0].score += rows[i].openness_big5;
+            x.tones[1].score += rows[i].conscientiousness_big5;
+            x.tones[2].score += rows[i].extraversion_big5;
+            x.tones[3].score += rows[i].agreeableness_big5;
+            x.tones[4].score += rows[i].emotional_range_big5;
         }
         console.log(x);
         callback(x);

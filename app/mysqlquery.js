@@ -186,7 +186,7 @@ function getEmotionTone(Userid, Date, callback) {
 function getLanguageTone(Userid, Date, callback) {
     connection.query('SELECT * FROM language_tone WHERE userid = ? AND date = ?', [ Userid, Date] ,function (err, rows, fields) {
         if (err)
-            callback(defaultJson.dox`cument_tone.tone_categories[0]);
+            callback(defaultJson.document_tone.tone_categories[0]);
         let x = clone(languageTemplate);
         for (let i = 0; i < rows.length; i++) {
                 x.tones[0].score += rows[i].analytical;

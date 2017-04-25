@@ -219,12 +219,27 @@ function stopApp() {
     connection.end();
 }
 
+function updateDB(userid, date, watsonResponse) {
+
+}
+
+function retrieveData(userid, date) {
+
+    return ;
+}
+
 module.exports = {
-    getEmotionTone,
-    getLanguageTone,
-    getSocialTone,
-    setEmotionTone,
-    setLanguageTone,
-    setSocialTone,
+    updateDB,
+    retrieveData,
     stopApp
 };
+
+// module.exports = {
+//     getEmotionTone,
+//     getLanguageTone,
+//     getSocialTone,
+//     setEmotionTone,
+//     setLanguageTone,
+//     setSocialTone,
+//     stopApp
+// };

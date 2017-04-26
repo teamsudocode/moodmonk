@@ -4,6 +4,7 @@
 const dataFileName = __dirname+"/../data/data.json";
 
 var data = require(dataFileName);
+var db = require("./mysqlquery");
 var fs = require("fs");
 
 function getDateKey() {
@@ -14,36 +15,40 @@ function getDateKey() {
     return mm+'-'+dd+'-'+yyyy;
 }
 
-function log(json) {
-    let key = getDateKey();
-    if (!data.hasOwnProperty(key)) {
-        data[key] = json;
-        console.log(data);
-        fs.writeFile(dataFileName, JSON.stringify(data), "utf8", () => {
-            console.log("data updated");
-        });
-    } else {
-        incrementDay(key, json);
-    }
+// function log(json) {
+//     let key = getDateKey();
+//     if (!data.hasOwnProperty(key)) {
+//         data[key] = json;
+//         console.log(data);
+//         fs.writeFile(dataFileName, JSON.stringify(data), "utf8", () => {
+//             console.log("data updated");
+//         });
+//     } else {
+//         incrementDay(key, json);
+//     }
+// }
+
+function log(userid, json) {
+    db.updateDB(userid, json);
 }
 
-function incrementDay(key, json) {
-    /* assumed that this function is invoked only when
-     an object for same day exist
-     */
-    let toneCategories = json.document_tone.tone_categories;
-    // console.log(JSON.stringify(data));
-    for (let i = 0; i < toneCategories.length; i++) {
-        for (let j = 0; j < toneCategories[i].tones.length; j++) {
-            data[key].document_tone.tone_categories[i].tones[j].score +=
-                json.document_tone.tone_categories[i].tones[j].score;
-        }
-    }
-    // console.log(JSON.stringify(data));
-    fs.writeFile(dataFileName, JSON.stringify(data), "utf8", () => {
-        console.log('data updated by incrementing');
-    });
-}
+// function incrementDay(key, json) {
+//     /* assumed that this function is invoked only when
+//      an object for same day exist
+//      */
+//     let toneCategories = json.document_tone.tone_categories;
+//     // console.log(JSON.stringify(data));
+//     for (let i = 0; i < toneCategories.length; i++) {
+//         for (let j = 0; j < toneCategories[i].tones.length; j++) {
+//             data[key].document_tone.tone_categories[i].tones[j].score +=
+//                 json.document_tone.tone_categories[i].tones[j].score;
+//         }
+//     }
+//     // console.log(JSON.stringify(data));
+//     fs.writeFile(dataFileName, JSON.stringify(data), "utf8", () => {
+//         console.log('data updated by incrementing');
+//     });
+// }
 
 function dominantEmotion(json){
     let max = 0.0;
@@ -58,35 +63,32 @@ function dominantEmotion(json){
     return dominant_emotion;
 }
 
-function getDataByDate(date) {
-    if (!data.hasOwnProperty(date)) {
-        return "404";
-    }
-    let json = data[date];
-    let retvalue = {
-        "emotion_tone": {
-            "anger": json.document_tone.tone_categories[0].tones[0].score,
-            "disgust": json.document_tone.tone_categories[0].tones[1].score,
-            "fear": json.document_tone.tone_categories[0].tones[2].score,
-            "sadness": json.document_tone.tone_categories[0].tones[3].score,
-            "joy": json.document_tone.tone_categories[0].tones[4].score
-        },
-        "language_tone": {
-            "analytical": json.document_tone.tone_categories[1].tones[0].score,
-            "confident": json.document_tone.tone_categories[1].tones[1].score,
-            "tentative": json.document_tone.tone_categories[1].tones[2].score
-        },
-        "social_tone": {
-            "openness": json.document_tone.tone_categories[2].tones[0].score,
-            "conscientiousness": json.document_tone.tone_categories[2].tones[1].score,
-            "extraversion": json.document_tone.tone_categories[2].tones[2].score,
-            "agreableness": json.document_tone.tone_categories[2].tones[3].score,
-            "emotional_range": json.document_tone.tone_categories[2].tones[4].score
-        }
-    };
-    return retvalue;
+function getDataByDate(userid, date, callback) {
+    db.retrieveData(userid, date, function(json) {
+        let retvalue = {
+            "emotion_tone": {
+                "anger":    json.emotion_tone.tones[0].score,
+                "disgust":  json.emotion_tone.tones[1].score,
+                "fear":     json.emotion_tone.tones[2].score,
+                "sadness":  json.emotion_tone.tones[3].score,
+                "joy":      json.emotion_tone.tones[4].score
+            },
+            "language_tone": {
+                "analytical": json.language_tone.tones[0].score,
+                "confident":  json.language_tone.tones[1].score,
+                "tentative":  json.language_tone.tones[2].score
+            },
+            "social_tone": {
+                "openness":          json.social_tone.tones[0].score,
+                "conscientiousness": json.social_tone.tones[1].score,
+                "extraversion":      json.social_tone.tones[2].score,
+                "agreableness":      json.social_tone.tones[3].score,
+                "emotional_range":   json.social_tone.tones[4].score
+            }
+        };
+        callback(retvalue);
+    });
 }
-
 
 Date.prototype.addDays = function(days) {
     var dat = new Date(this.valueOf());

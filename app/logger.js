@@ -118,7 +118,8 @@ function getDataBetweenDates(userid, from, to, callback) {
 
     for (let i = 0; i < dateKeys.length; i++) {
         getDataByDate(userid, dateKeys[i], function(currentJson) {
-            responseJson[dateKeys[i]] = currentJson;
+            let myI = i;
+            responseJson[dateKeys[myI]] = currentJson;
             completed--;
         });
     }

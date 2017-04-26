@@ -39,7 +39,7 @@ create table social_tone (
 `openness_big5`          decimal(11, 10) not null,
 `conscientiousness_big5` decimal(11, 10) not null,
 `extraversion_big5`      decimal(11, 10) not null,
-`agreableness_big5`     decimal(11, 10) not null,
+`agreeableness_big5`     decimal(11, 10) not null,
 `emotional_range_big5`   decimal(11, 10) not null,
 primary key (`index`, `userid`, `date`)
 );

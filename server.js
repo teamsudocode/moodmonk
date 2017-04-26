@@ -100,6 +100,7 @@ app.get('/logger/range/:from/:to', function (req, res) {
 app.get('/recommend/:what/:expression', function (req, res) {
     // overriding recommendations due to missing api keys
     res.send(200);
+    return;
 
     function customCallback(text) {
         res.send(text);

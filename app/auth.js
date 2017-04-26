@@ -8,7 +8,7 @@ var conn  = mysql.createConnection({
 
 function login(userId, password, callback) {
     conn.query(
-        "select * from `Users` where `userid` = ? and `password` = ?", 
+        "select * from `User` where `userid` = ? and `password` = ?", 
         [ userId, password ], 
         function(err, res, fields) {
             if (err) throw err;
@@ -20,7 +20,7 @@ function login(userId, password, callback) {
 
 function signup(userid, password, callback) {
     conn.query(
-        "insert into `Users` SET ?",
+        "insert into `User` SET ?",
         { "userid": userid, "password": password },
         function(err, res, fields) {
             if (err !== null) {

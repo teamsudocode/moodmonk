@@ -19,7 +19,7 @@ connection.connect(function (err) {
 });
 
 var emotionTemplate = {
-"tones": [
+    "tones": [
         {
         "score": 0.00,
         "tone_id": "anger",
@@ -140,8 +140,10 @@ function clone(obj) {
 
 function setEmotionTone(jsonobject, callback) {
     connection.query('INSERT INTO emotion_tone SET ?', jsonobject ,function (err, rows, fields) {
-        if (err)
+        if (err) {
+            console.log("setEmotionTone : ", err);
             callback(false);
+        }
         console.log('Inserted in EmotionTone Table');
         callback(true);
     });
@@ -149,8 +151,10 @@ function setEmotionTone(jsonobject, callback) {
 
 function setLanguageTone(jsonobject, callback) {
     connection.query('INSERT INTO language_tone SET ?', jsonobject ,function (err, rows, fields) {
-        if (err)
+        if (err) {
+            console.log("setLanguageTone : ", err);
             callback(false);
+        }
         console.log('Inserted in LanguageTone Table');
         callback(true);
     });
@@ -158,8 +162,10 @@ function setLanguageTone(jsonobject, callback) {
 
 function setSocialTone(jsonobject, callback) {
     connection.query('INSERT INTO social_tone SET ?', jsonobject ,function (err, rows, fields) {
-        if (err)
+        if (err) {
+            console.log("setSocialTone : ", err);
             callback(false);
+        }
         console.log('Inserted in SocialTone Table');
         callback(true);
     });
@@ -223,29 +229,29 @@ function updateDB(userid, json) {
     let emotion_obj = null, lang_obj = null, social_obj = null;
 
     emotion_obj = {};
-    emotion_obj.userid = userid;
-    emotion_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
-    emotion_obj.anger = json.document_tone.tone_categories[0].tones[0].score;
+    emotion_obj.userid  = userid;
+    emotion_obj.date    = new Date().toISOString().slice(0, 10).replace('T', ' ');
+    emotion_obj.anger   = json.document_tone.tone_categories[0].tones[0].score;
     emotion_obj.disgust = json.document_tone.tone_categories[0].tones[1].score;
-    emotion_obj.fear = json.document_tone.tone_categories[0].tones[2].score;
-    emotion_obj.joy = json.document_tone.tone_categories[0].tones[3].score;
+    emotion_obj.fear    = json.document_tone.tone_categories[0].tones[2].score;
+    emotion_obj.joy     = json.document_tone.tone_categories[0].tones[3].score;
     emotion_obj.sadness = json.document_tone.tone_categories[0].tones[4].score;
             
     lang_obj = {};
-    lang_obj.userid = userid;
-    lang_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
-    lang_obj.analytical = json.document_tone.tone_categories[1].tones[0].score;
-    lang_obj.confident = json.document_tone.tone_categories[1].tones[1].score;
-    lang_obj.tentative =  json.document_tone.tone_categories[1].tones[2].score;
+    lang_obj.userid      = userid;
+    lang_obj.date        = new Date().toISOString().slice(0, 10).replace('T', ' ');
+    lang_obj.analytical  = json.document_tone.tone_categories[1].tones[0].score;
+    lang_obj.confident   = json.document_tone.tone_categories[1].tones[1].score;
+    lang_obj.tentative   = json.document_tone.tone_categories[1].tones[2].score;
         
     social_obj = {};
-    social_obj.userid = userid;
-    social_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
-    social_obj.openness_big5 = json.document_tone.tone_categories[2].tones[0].score;
+    social_obj.userid                 = userid;
+    social_obj.date                   = new Date().toISOString().slice(0, 10).replace('T', ' ');
+    social_obj.openness_big5          = json.document_tone.tone_categories[2].tones[0].score;
     social_obj.conscientiousness_big5 = json.document_tone.tone_categories[2].tones[1].score;
-    social_obj.extraversion_big5 = json.document_tone.tone_categories[2].tones[2].score;
-    social_obj.agreeableness_big5 = json.document_tone.tone_categories[2].tones[3].score;
-    social_obj.emotional_range_big5 = json.document_tone.tone_categories[2].tones[4].score;
+    social_obj.extraversion_big5      = json.document_tone.tone_categories[2].tones[2].score;
+    social_obj.agreeableness_big5     = json.document_tone.tone_categories[2].tones[3].score;
+    social_obj.emotional_range_big5   = json.document_tone.tone_categories[2].tones[4].score;
 
     setEmotionTone(emotion_obj, (status) => {
         console.log("Emotion tone set : " + status);
@@ -268,6 +274,11 @@ function retrieveData(userid, date, callback) {
         language_tone: null
     };
 
+    // fixing date format
+    let tmpDate = new Date(date);
+    date = tmpDate.getFullYear() + '-' + (tmpDate.getMonth()+1) + '-' + tmpDate.getDate();
+    console.log("retrieveData : ", userid, date);
+
     getSocialTone(userid, date, function(retData) {
         console.log("received " + retData);
         toneData.social_tone = retData;
@@ -286,6 +297,7 @@ function retrieveData(userid, date, callback) {
 
     let self_id = setInterval(function() {
         if (pending == 0) {
+            console.log('sending', toneData);
             callback(toneData);
             clearInterval(self_id);
         }
@@ -295,7 +307,10 @@ function retrieveData(userid, date, callback) {
 module.exports = {
     updateDB,
     retrieveData,
-    stopApp
+    stopApp,
+    getEmotionTone,
+    getLanguageTone,
+    getSocialTone
 };
 
 // module.exports = {

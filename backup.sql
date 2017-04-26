@@ -40,30 +40,6 @@ INSERT INTO `User` VALUES ('lama','password'),('monk','password');
 UNLOCK TABLES;
 
 --
--- Table structure for table `Users`
---
-
-DROP TABLE IF EXISTS `Users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Users` (
-  `userid` varchar(255) NOT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Users`
---
-
-LOCK TABLES `Users` WRITE;
-/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES ('asudhanshu','password'),('fdasudhanshu','password'),('fdasudhanshud','password'),('fdasudhanshudssd','password'),('fdasudhanshudssdds','password'),('fdfdsfdasudhanshudssdds','password'),('fdfsdfdsfdasudhanshudssdds','password'),('fdfsdfdsfdasudhanshudssddsfd','password'),('himanshu','password'),('himanshub16','password'),('himanshub164','password'),('himanshub1fd6','password'),('himanshupwqr','password'),('himanshupwqsr','password'),('migom','migom'),('pegu','password'),('sudhanshu','password');
-/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `emotion_tone`
 --
 
@@ -160,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-26 18:48:23
+-- Dump completed on 2017-04-26 19:54:53

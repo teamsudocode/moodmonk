@@ -62,6 +62,7 @@ app.get(['/', '/index.html'], function(req, res) {
     //     res.send('fuckoff');
 });
 
+var sampleJson = require('./response.json');
 app.get('/askWatson/:query', function (req, res) {
 
     if (isLoggedIn(req.cookies.sessionId) == false) {
@@ -70,7 +71,7 @@ app.get('/askWatson/:query', function (req, res) {
 
     console.log(req.params.query);
     function myCallback(retvalue) {
-        console.log('received response');
+        // console.log('received response');
         logger.log(session[req.cookies.sessionId], retvalue);
         res.send(logger.dominantEmotion(retvalue));
         console.log('response sent to client');
@@ -81,7 +82,8 @@ app.get('/askWatson/:query', function (req, res) {
 
 app.get('/logger/day/:date', function (req, res) {
     logger.getByDate(session[req.cookies.sessionId], req.params.date, (json) => {
-        console.log('sending back', json);
+        // console.log('sending back', json);
+        console.log("/logger/date/:date : sending data to client");
         res.send(json);
     });
     // res.send(logger.getByDate(req.params.date));
@@ -90,6 +92,7 @@ app.get('/logger/day/:date', function (req, res) {
 app.get('/logger/range/:from/:to', function (req, res) {
     // logger.getBetweenDates(session[req.cookies.sessionId], req.params.from, req.params.to, res.send);
     logger.getBetweenDates(session[req.cookies.sessionId], req.params.from, req.params.to, function(json) {
+        console.log("/logger for range : sending data to client");
         res.send(json);
     });
 });
@@ -106,7 +109,6 @@ app.get('/recommend/:what/:expression', function (req, res) {
         case 'test':     recommend.test(req.params.expression, customCallback);     break;
         default :        res.send('invalid');
     }
-
 });
 
 

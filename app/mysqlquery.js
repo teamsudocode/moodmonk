@@ -184,7 +184,8 @@ function getEmotionTone(Userid, Date, callback) {
             x.tones[3].score += rows[i].joy;
             x.tones[4].score += rows[i].sadness;
         }
-        console.log(x);
+        // console.log(x);
+        console.log("getEmotionTone : sending emotion tone");
         callback(x);
     });
 };
@@ -199,7 +200,8 @@ function getLanguageTone(Userid, Date, callback) {
                 x.tones[1].score += rows[i].confident;
                 x.tones[2].score += rows[i].tentative;
         }
-        console.log(x);
+        // console.log(x);
+        console.log("getLanguageTone : sending language tone");
         callback(x);
     });
 };
@@ -216,7 +218,8 @@ function getSocialTone(Userid, Date, callback) {
             x.tones[3].score += rows[i].agreeableness_big5;
             x.tones[4].score += rows[i].emotional_range_big5;
         }
-        console.log(x);
+        // console.log(x);
+        console.log("getSocialTone : sending Social tone");
         callback(x);
     });
 };
@@ -280,24 +283,24 @@ function retrieveData(userid, date, callback) {
     console.log("retrieveData : ", userid, date);
 
     getSocialTone(userid, date, function(retData) {
-        console.log("received " + retData);
+        console.log("received social tone");
         toneData.social_tone = retData;
         pending -= 1;
     });
     getLanguageTone(userid, date, function(retData) {
-        console.log("received " + retData);
+        console.log("received language tone");
         toneData.language_tone = retData;
         pending -= 1;
     });
     getEmotionTone(userid, date, function(retData) {
-        console.log("received " + retData);
+        console.log("received emotion tone");
         toneData.emotion_tone = retData;
         pending -= 1;
     });
 
     let self_id = setInterval(function() {
         if (pending == 0) {
-            console.log('sending', toneData);
+            console.log('sending tonedata');
             callback(toneData);
             clearInterval(self_id);
         }

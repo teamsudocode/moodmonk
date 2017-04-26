@@ -98,6 +98,8 @@ app.get('/logger/range/:from/:to', function (req, res) {
 });
 
 app.get('/recommend/:what/:expression', function (req, res) {
+    // overriding recommendations due to missing api keys
+    res.send(200);
 
     function customCallback(text) {
         res.send(text);
@@ -111,6 +113,17 @@ app.get('/recommend/:what/:expression', function (req, res) {
     }
 });
 
+app.post('/signup', function(req, res) {
+    let failCheck = true;
+    auth.signup(req.body.userid, req.body.password, (status) => {
+        if (status)
+            res.redirect('/');
+        else
+            res.send({
+                "error": "User already exists"
+            });
+    })
+});
 
 app.post('/login', function(req, res) {
     // assuming ok username and password

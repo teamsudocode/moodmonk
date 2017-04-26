@@ -24,9 +24,9 @@ function signup(userid, password, callback) {
         { "userid": userid, "password": password },
         function(err, res, fields) {
             if (err !== null) {
-                if (err.code === "ER_DUP_ENTRY") callback('exists');
+                if (err.code === "ER_DUP_ENTRY") callback(false);
             }
-            else  callback("ok");
+            else  callback(true);
         }
     );
 }

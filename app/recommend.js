@@ -33,7 +33,7 @@ function getVideo(emotion, callback) {
     else if (emotion == "joy")      { feel = "life";       }
     else if (emotion == "sadness")  { feel = "funny";      }
     var results = youtube.search.list({ part: 'id,snippet', q: feel, maxResults: 25 });
-    x = results.url.href;
+    let x = results.url.href;
     request({ url: x, json: true, proxy: 'http://172.31.1.6:8080/' }, function (err, localres, json) {
         if (err) {
             throw err;

@@ -220,30 +220,32 @@ function stopApp() {
 }
 
 function updateDB(userid, json) {
+    let emotion_obj = null, lang_obj = null, social_obj = null;
+
     emotion_obj = {};
-            emotion_obj.userid = userid;
-            emotion_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
-            emotion_obj.anger = json.document_tone.tone_categories[0].tones[0].score;
-            emotion_obj.disgust = json.document_tone.tone_categories[0].tones[1].score;
-            emotion_obj.fear = json.document_tone.tone_categories[0].tones[2].score;
-            emotion_obj.joy = json.document_tone.tone_categories[0].tones[3].score;
-            emotion_obj.sadness = json.document_tone.tone_categories[0].tones[4].score;
+    emotion_obj.userid = userid;
+    emotion_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
+    emotion_obj.anger = json.document_tone.tone_categories[0].tones[0].score;
+    emotion_obj.disgust = json.document_tone.tone_categories[0].tones[1].score;
+    emotion_obj.fear = json.document_tone.tone_categories[0].tones[2].score;
+    emotion_obj.joy = json.document_tone.tone_categories[0].tones[3].score;
+    emotion_obj.sadness = json.document_tone.tone_categories[0].tones[4].score;
             
     lang_obj = {};
-            lang_obj.userid = userid;
-            lang_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
-            lang_obj.analytical = json.document_tone.tone_categories[1].tones[0].score;
-            lang_obj.confident = json.document_tone.tone_categories[1].tones[1].score;
-            lang_obj.tentative =  json.document_tone.tone_categories[1].tones[2].score;
+    lang_obj.userid = userid;
+    lang_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
+    lang_obj.analytical = json.document_tone.tone_categories[1].tones[0].score;
+    lang_obj.confident = json.document_tone.tone_categories[1].tones[1].score;
+    lang_obj.tentative =  json.document_tone.tone_categories[1].tones[2].score;
         
     social_obj = {};
-            social_obj.userid = userid;
-            social_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
-            social_obj.openness_big5 = json.document_tone.tone_categories[2].tones[0].score;
-            social_obj.conscientiousness_big5 = json.document_tone.tone_categories[2].tones[1].score;
-            social_obj.extraversion_big5 = json.document_tone.tone_categories[2].tones[2].score;
-            social_obj.agreeableness_big5 = json.document_tone.tone_categories[2].tones[3].score;
-            social_obj.emotional_range_big5 = json.document_tone.tone_categories[2].tones[4].score;
+    social_obj.userid = userid;
+    social_obj.date = new Date().toISOString().slice(0, 10).replace('T', ' ');
+    social_obj.openness_big5 = json.document_tone.tone_categories[2].tones[0].score;
+    social_obj.conscientiousness_big5 = json.document_tone.tone_categories[2].tones[1].score;
+    social_obj.extraversion_big5 = json.document_tone.tone_categories[2].tones[2].score;
+    social_obj.agreeableness_big5 = json.document_tone.tone_categories[2].tones[3].score;
+    social_obj.emotional_range_big5 = json.document_tone.tone_categories[2].tones[4].score;
 
     setEmotionTone(emotion_obj, (status) => {
         console.log("Emotion tone set : " + status);
@@ -260,25 +262,32 @@ function updateDB(userid, json) {
 
 function retrieveData(userid, date, callback) {
     let pending = 3;
-    let socialData = null, langData = null;
-    
+    let toneData = {
+        emotion_tone: null,
+        social_tone: null,
+        language_tone: null
+    };
+
     getSocialTone(userid, date, function(retData) {
         console.log("received " + retData);
+        toneData.social_tone = retData;
         pending -= 1;
     });
     getLanguageTone(userid, date, function(retData) {
         console.log("received " + retData);
+        toneData.language_tone = retData;
         pending -= 1;
     });
     getEmotionTone(userid, date, function(retData) {
         console.log("received " + retData);
+        toneData.emotion_tone = retData;
         pending -= 1;
     });
 
-    setInterval(function() {
+    let self_id = setInterval(function() {
         if (pending == 0) {
-            callback(returnvalue);
-            return;
+            callback(toneData);
+            clearInterval(self_id);
         }
     }, 500);
 }

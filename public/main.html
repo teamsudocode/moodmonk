@@ -69,9 +69,35 @@
     <form action="/login" method="post">
         <div>
             <input type="text" name="userid" placeholder="Username">
+            <svg style="display: inline-block; margin-bottom: -0.2em" height="1.2em" width="1.2em">
+                <circle cx="0.6em" cy="0.6em" r="0.5em" fill="none"></circle>
+            </svg>
         </div>
         <div>
             <input type="password" name="password"  placeholder="Password">
+            <svg style="display: inline-block; margin-bottom: -0.2em" height="1.2em" width="1.2em">
+                <circle cx="0.6em" cy="0.6em" r="0.5em" fill="none"></circle>
+            </svg>
+        </div>
+        <div>
+            <input type="password" name="passwordConfirm"  placeholder="Confirm password">
+            <svg style="display: inline-block; margin-bottom: -0.2em" height="1.2em" width="1.2em">
+                <circle cx="0.6em" cy="0.6em" r="0.5em" fill="none" id="passwordConfirm"></circle>
+            </svg>
+            <script>
+                let red = "rgb(0, 117, 255)";
+                let green = "red";
+                let password = document.forms[0].password;
+                let confirm = document.forms[0].passwordConfirm;
+                let bullet = document.getElementById("passwordConfirm");
+                confirm.addEventListener('change', function() {
+                    console.log("changed");
+                    if (confirm == password)
+                        bullet.fill = red;
+                    else
+                        bullet.fill = green;
+                });
+            </script>
         </div>
         <div>
             <button>Login</button>

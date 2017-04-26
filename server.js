@@ -71,15 +71,20 @@ app.get('/askWatson/:query', function (req, res) {
     console.log(req.params.query);
     function myCallback(retvalue) {
         console.log('received response');
-        logger.log(retvalue);
+        logger.log(session[req.cookies.sessionId], retvalue);
         res.send(logger.dominantEmotion(retvalue));
         console.log('response sent to client');
     };
     tone(req.params.query, myCallback);
+    myCallback(sampleJson);
 });
 
 app.get('/logger/day/:date', function (req, res) {
-    res.send(logger.getByDate(req.params.date));
+    logger.getByDate(session[req.cookies.sessionId], req.params.date, (json) => {
+        console.log('sending back', json);
+        res.send(json);
+    });
+    // res.send(logger.getByDate(req.params.date));
 });
 
 app.get('/logger/range/:from/:to', function (req, res) {
@@ -107,6 +112,7 @@ app.post('/login', function(req, res) {
     let failCheck = true;
     if (!sessionExists(req.body.userid)) {
         auth.login(req.body.userid, req.body.password, (status) => {
+            console.log('login status: ' + status);
             if (status) {
                 let sessionId = getRandomKey(req.body.userid);
                 session[sessionId] = req.body.userid;

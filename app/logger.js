@@ -106,20 +106,29 @@ function getDates(startDate, stopDate) {
     return dateArray;
 }
 
-function getDataBetweenDates(from, to) {
+function getDataBetweenDates(userid, from, to, callback) {
     let currentJson = null;
 
     let responseJson = {};
     let dateArray = getDates(new Date(from), new Date(to));
+    let completed = dateArray.length;
+    let dateKeys = [];
+    for (let i = 0; i < dateArray.length; i++)
+        dateKeys.push(dateArray[i].getMonth()+1+'-'+dateArray[i].getDate()+'-'+dateArray[i].getFullYear());
 
-    for (let i = 0; i < dateArray.length; i++) {
-        let date = dateArray[i];
-        let dateKey = date.getMonth()+1+'-'+date.getDate()+'-'+date.getFullYear();
-        let currentJson = getDataByDate(dateKey);
-        if (currentJson != '404') {
-            responseJson[dateKey] = currentJson;
-        }
+    for (let i = 0; i < dateKeys.length; i++) {
+        getDataByDate(userid, dateKeys[i], function(currentJson) {
+            responseJson[dateKeys[i]] = currentJson;
+            completed--;
+        });
     }
+    let self_id = setInterval(function() {
+        if (completed == 0) {
+            // console.log("getDateBetweenDates: sending ", responseJson);
+            callback(responseJson);
+            clearInterval(self_id);
+        }
+    }, 100);
     return responseJson;
 }
 

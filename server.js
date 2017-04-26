@@ -88,7 +88,10 @@ app.get('/logger/day/:date', function (req, res) {
 });
 
 app.get('/logger/range/:from/:to', function (req, res) {
-    res.send(logger.getBetweenDates(req.params.from, req.params.to));
+    // logger.getBetweenDates(session[req.cookies.sessionId], req.params.from, req.params.to, res.send);
+    logger.getBetweenDates(session[req.cookies.sessionId], req.params.from, req.params.to, function(json) {
+        res.send(json);
+    });
 });
 
 app.get('/recommend/:what/:expression', function (req, res) {
@@ -100,7 +103,7 @@ app.get('/recommend/:what/:expression', function (req, res) {
         case 'video':    recommend.getVideo(req.params.expression, customCallback);      break;
         case 'activity': recommend.getActivities(req.params.expression, customCallback); break;
         case 'quote':    recommend.getQuotes(req.params.expression, customCallback);     break;
-        case 'test':    recommend.test(req.params.expression, customCallback);     break;
+        case 'test':     recommend.test(req.params.expression, customCallback);     break;
         default :        res.send('invalid');
     }
 

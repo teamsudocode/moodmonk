@@ -116,6 +116,7 @@ app.get('/recommend/:what/:expression', function (req, res) {
 
 app.post('/signup', function(req, res) {
     let failCheck = true;
+    console.log('signup for', req.body.userid, req.body.password, req.body.passwordConfirm);
     auth.signup(req.body.userid, req.body.password, (status) => {
         if (status)
             res.redirect('/');

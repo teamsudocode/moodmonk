@@ -90,7 +90,7 @@ app.get('/logger/day/:date', function (req, res) {
 });
 
 app.get('/logger/range/:from/:to', function (req, res) {
-    // logger.getBetweenDates(session[req.cookies.sessionId], req.params.from, req.params.to, res.send);
+    // logger.getBetweenDates('lama', req.params.from, req.params.to, function(json) {
     logger.getBetweenDates(session[req.cookies.sessionId], req.params.from, req.params.to, function(json) {
         console.log("/logger for range : sending data to client");
         res.send(json);

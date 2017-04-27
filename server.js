@@ -62,7 +62,7 @@ app.get(['/', '/index.html'], function(req, res) {
     //     res.send('fuckoff');
 });
 
-var sampleJson = require('./response.json');
+// var sampleJson = require('./response.json');
 app.get('/askWatson/:query', function (req, res) {
 
     if (isLoggedIn(req.cookies.sessionId) == false) {
@@ -77,7 +77,7 @@ app.get('/askWatson/:query', function (req, res) {
         console.log('response sent to client');
     };
     tone(req.params.query, myCallback);
-    myCallback(sampleJson);
+    // myCallback(sampleJson);
 });
 
 app.get('/logger/day/:date', function (req, res) {
@@ -99,8 +99,8 @@ app.get('/logger/range/:from/:to', function (req, res) {
 
 app.get('/recommend/:what/:expression', function (req, res) {
     // overriding recommendations due to missing api keys
-    res.send(200);
-    return;
+    //res.send(200);
+    //return;
 
     function customCallback(text) {
         res.send(text);

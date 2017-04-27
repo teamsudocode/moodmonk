@@ -1,11 +1,12 @@
 'use strict';
 var request = require('request');
-var r = request.defaults({ 'proxy': 'http://172.31.1.6:8080/' });
+var http_proxy = "http://172.31.1.4:8080/";
+var r = request.defaults({ 'proxy': http_proxy });
 
 var google = require('googleapis');
-google.options({ proxy: 'http://172.31.1.6:8080/' });
+google.options({ proxy: http_proxy });
 
-var youtube = google.youtube({ version: 'v3', auth: 'API_KEY' });
+var youtube = google.youtube({ version: 'v3', auth: 'AIzaSyAoN1RLSoqgf7ujPK-2cfT8pz4qQR1_tvg' });
 
 function getQuotes(emotion, callback) {
     //retrieving quotes
@@ -34,11 +35,11 @@ function getVideo(emotion, callback) {
     else if (emotion == "sadness")  { feel = "funny";      }
     var results = youtube.search.list({ part: 'id,snippet', q: feel, maxResults: 25 });
     let x = results.url.href;
-    request({ url: x, json: true, proxy: 'http://172.31.1.6:8080/' }, function (err, localres, json) {
+    request({ url: x, json: true, proxy: http_proxy }, function (err, localres, json) {
         if (err) {
             throw err;
         }
-        vid = "https://www.youtube.com/watch?v=" + json.items[0].id.videoId;
+        let vid = "https://www.youtube.com/watch?v=" + json.items[0].id.videoId;
         callback(vid);
     });
 }
@@ -79,4 +80,4 @@ function test(expr, callback) {
     callback(expr);
 }
 
-module.exports = { getVideo, getActivities, getQuotes, test };
+module.exports = { getVideo, getActivities, getQuotes, test, http_proxy };

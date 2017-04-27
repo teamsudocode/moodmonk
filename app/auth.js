@@ -2,8 +2,7 @@ var mysql = require('mysql');
 var conn  = mysql.createConnection({
     host: 'localhost',
     database: 'moodmonk',
-    user: 'root',
-    password: 'password'
+    user: 'root'
 });
 
 function login(userId, password, callback) {

@@ -17,7 +17,7 @@
             border-radius: 3px;
             padding: 5px;
         }
-        form div button {
+        form div button, #logoutbutton {
             padding: 5px;
             cursor: pointer;
             background-color: transparent;
@@ -34,6 +34,16 @@
 </head>
 
 <body>
+    <% if (loggedIn) { %>
+    <center style="position: absolute; margin-top: 25vh; width: 100vw;">
+    <div style = "padding-right: 50px" >
+        <button id = "logoutbutton" style = "float:right">Log Out</button>
+        <script>
+            document.getElementById("logoutbutton").onclick = function(){
+                window.location.pathname = "logout";
+        </script>
+    </div>
+     <% } %>
     <p id="logomark">Mood Monk</p>
     <!--Word-->
     <a id="close" class="hidden"></a>
@@ -73,8 +83,8 @@
         <div>
             <input type="password" name="password"  placeholder="Password">
         </div>
-        <div>
-            <input id ="pc" type="password" name="passwordConfirm"  placeholder="Confirm password">
+        <div id = "cp" style = "display:none">
+            <input type="password" name="passwordConfirm"  placeholder="Confirm password">
         </div>
         <div>
             <button id ="logbutton">Login</button>
@@ -82,7 +92,7 @@
             <span id ="signup"><a>Not Registered?</a></span>
             <script>
                 document.getElementById("signup").addEventListener("click", function() {
-                    document.getElementById("pc").style.display = "block";
+                    document.getElementById("cp").style.display = "block";
                     document.getElementById("signup").style.display = "none";
                     document.getElementById("logbutton").innerHTML = "Sign Up";
                     document.getElementsByTagName('form')[0].action = '/signup';

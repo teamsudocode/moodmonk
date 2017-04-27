@@ -1,5 +1,6 @@
 var request = require('request');
-var r = request.defaults({'proxy': 'http://172.31.1.6:8080/'});
+var http_proxy = require('./tone').http_proxy;
+var r = request.defaults({'proxy': http_proxy});
 
 var headers = {
     'Content-Type': 'application/json'
@@ -13,8 +14,8 @@ var options = {
     headers: headers,
     body: dataString,
     auth: {
-        'username' : "USERNAME_FROM_WATSON",
-        'pass': 'PASSWORD_FROM_WATSON'
+        "username": "61cfe4bf-f799-479c-b2a2-54e7085cadfd",
+        "pass": "LmGeondUno35"
     }
 };
 

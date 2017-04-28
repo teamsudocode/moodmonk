@@ -1,6 +1,6 @@
 'use strict';
 var request = require('request');
-var http_proxy = "http://172.31.1.4:8080/";
+var http_proxy = require(__dirname+"/../config.json").http_proxy;
 var r = request.defaults({ 'proxy': http_proxy });
 
 var google = require('googleapis');

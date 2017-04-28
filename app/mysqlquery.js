@@ -1,10 +1,13 @@
 'use strict';
 var defaultJson = require(__dirname+'/../response.json');
 
+var config = require(__dirname+"/../config.json");
+
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: config.mysqlHost,
+    user: config.mysqlUser,
+    password: config.mysqlPassword,
     database: 'moodmonk'
 });
 

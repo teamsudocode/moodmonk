@@ -1,5 +1,5 @@
 var request = require('request');
-var http_proxy = require('./tone').http_proxy;
+var http_proxy = require(__dirname+'/../config.json').http_proxy;
 var r = request.defaults({'proxy': http_proxy});
 
 var headers = {

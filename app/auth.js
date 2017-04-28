@@ -1,8 +1,11 @@
+var config = require(__dirname+"/../config.json");
+
 var mysql = require('mysql');
 var conn  = mysql.createConnection({
-    host: 'localhost',
+    host: config.mysqlHost,
     database: 'moodmonk',
-    user: 'root'
+    user: config.mysqlUser,
+    password: config.mysqlPassword
 });
 
 function login(userId, password, callback) {

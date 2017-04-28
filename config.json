@@ -1,0 +1,6 @@
+{
+    "mysqlHost": "localhost",
+    "mysqlUser": "root",
+    "mysqlPassword": "password",
+    "http_proxy": "http://172.31.1.4:8080/"
+}

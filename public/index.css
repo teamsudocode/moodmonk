@@ -1278,3 +1278,16 @@ form div button,
 form div button:hover {
     border: 3px solid white;
 }
+
+#signup {
+    font-family: 'Quicksand', sans-serif;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+#signup:hover {
+    border-bottom: 1px solid white;
+}

@@ -1263,18 +1263,6 @@ form div input {
     padding: 5px;
 }
 
-form div button,
-#logoutbutton {
-    padding: 5px;
-    cursor: pointer;
-    background-color: transparent;
-    border-radius: 4px;
-    border-color: white;
-    border: 1px solid white;
-    color: white;
-    font-size: 1.2em;
-}
-
 form div button:hover {
     border: 3px solid white;
 }
@@ -1290,4 +1278,20 @@ form div button:hover {
 
 #signup:hover {
     border-bottom: 1px solid white;
+}
+
+#logbutton {
+    width: 8vw;
+    font-family: 'Quicksand', sans-serif;
+    padding: 0.5vw;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#logbutton:hover {
+    transform: scale(1.1);
+    border: none;
 }

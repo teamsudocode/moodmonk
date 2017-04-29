@@ -1,6 +1,8 @@
 # Mood Monk : Your Emotion Partner
 MoodMonk is your daily journal which analyses your mood from your speech and displays appropriate analytics, along with plots of your stress levels.
 
+![Screenshot: Home Screen](https://raw.githubusercontent.com/himanshub16/moodmonk/master/public/homescreen.png)
+
 ### Pre-requisites
 * Ubuntu 16.04+
 * nodejs/npm [Find out to install](https://nodejs.org/en/download/package-manager/).

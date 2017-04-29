@@ -8,8 +8,8 @@ MoodMonk is your daily journal which analyses your mood from your speech and dis
 
 ### Usage
 * Update the config.json file and fill required configuration.
-* Install dependencies. `npm install`.
-* Start using by `node server.js`  .
+* Install dependencies. `npm install`(inside project directory).
+* Start using by `node server.js`.
 
 ```
 npm install

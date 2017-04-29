@@ -1311,3 +1311,19 @@ input:focus {
     font-size: 1.2em;
     font-family: 'Quicksand', sans-serif;
 }
+
+#logoutbutton {
+    width: 8vw;
+    font-family: 'Quicksand', sans-serif;
+    padding: 0.5vw;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    background: transparent;
+    color: white;
+    text-decoration: underline;
+    position: absolute;
+    right: 0;
+}

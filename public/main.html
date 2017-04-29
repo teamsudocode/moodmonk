@@ -8,179 +8,156 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lora:400i|Quicksand|Oswald|Text+Me+One" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <style>
-        form div {
-            margin-top: 10px;
-        }
-        form div input {
-            border-radius: 3px;
-            padding: 5px;
-        }
-        form div button, #logoutbutton {
-            padding: 5px;
-            cursor: pointer;
-            background-color: transparent;
-            border-radius: 4px;
-            border-color: white;
-            border: 1px solid white;
-            color: white;
-            font-size: 1.2em;
-        }
-        form div button:hover {
-            border: 3px solid white;
-        }
-    </style>
 </head>
 
 <body>
     <% if (loggedIn) { %>
-    <center style="position: absolute; margin-top: 25vh; width: 100vw;">
-    <div style = "padding-right: 50px" >
-        <button id = "logoutbutton" style = "float:right">Log Out</button>
-        <script>
-            document.getElementById("logoutbutton").onclick = function(){
-                window.location.pathname = "logout";
-            };
-        </script>
-    </div>
-     <% } %>
-    <p id="logomark">Mood Monk</p>
-    <!--Word-->
-    <a id="close" class="hidden"></a>
-    <!--loader-->
-    <div id="loading" class="hidden">
-        <div id="loader">
-            <div class="loader__bar"></div>
-            <div class="loader__bar"></div>
-            <div class="loader__bar"></div>
-            <div class="loader__bar"></div>
-            <div class="loader__bar"></div>
-            <div class="loader__ball"></div>
-        </div>
-    </div>
-    <!--Loader-2-->
-    <div id="loading2" class="hidden">
-        <div id="load">
-            <div>G</div>
-            <div>N</div>
-            <div>I</div>
-            <div>D</div>
-            <div>A</div>
-            <div>O</div>
-            <div>L</div>
-        </div>
-    </div>
+        <center style="position: absolute; margin-top: 25vh; width: 100vw;">
+            <div style="padding-right: 50px">
+                <button id="logoutbutton" style="float:right">Log Out</button>
+                <script>
+                    document.getElementById("logoutbutton").onclick = function() {
+                        window.location.pathname = "logout";
+                    };
+                </script>
+            </div>
+            <% } %>
+                <p id="logomark">Mood Monk</p>
+                <!--Word-->
+                <a id="close" class="hidden"></a>
+                <!--loader-->
+                <div id="loading" class="hidden">
+                    <div id="loader">
+                        <div class="loader__bar"></div>
+                        <div class="loader__bar"></div>
+                        <div class="loader__bar"></div>
+                        <div class="loader__bar"></div>
+                        <div class="loader__bar"></div>
+                        <div class="loader__ball"></div>
+                    </div>
+                </div>
+                <!--Loader-2-->
+                <div id="loading2" class="hidden">
+                    <div id="load">
+                        <div>G</div>
+                        <div>N</div>
+                        <div>I</div>
+                        <div>D</div>
+                        <div>A</div>
+                        <div>O</div>
+                        <div>L</div>
+                    </div>
+                </div>
 
-<% if (!loggedIn) { %>
-    <center style="position: absolute; margin-top: 25vh; width: 100vw;">
-    <% if (failed) { %>
-        Incorrect userid/password.
-    <% } %>
-    <form action="/login" method="post">
-        <div>
-            <input type="text" name="userid" placeholder="Username">
-        </div>
-        <div>
-            <input type="password" name="password"  placeholder="Password">
-        </div>
-        <div id = "cp" style = "display:none">
-            <input type="password" name="passwordConfirm"  placeholder="Confirm password">
-        </div>
-        <div>
-            <button id ="logbutton">Login</button>
-            <br><br>
-            <span id ="signup"><a>Not Registered?</a></span>
-            <script>
-                document.getElementById("signup").addEventListener("click", function() {
-                    document.getElementById("cp").style.display = "block";
-                    document.getElementById("signup").style.display = "none";
-                    document.getElementById("logbutton").innerHTML = "Sign Up";
-                    document.getElementsByTagName('form')[0].action = '/signup';
-                });
-            </script>
-        </div>
-    </center>
-    </form>
+                <% if (!loggedIn) { %>
+                    <center style="position: absolute; margin-top: 25vh; width: 100vw;">
+                        <% if (failed) { %>
+                            Incorrect userid/password.
+                            <% } %>
+                                <form action="/login" method="post">
+                                    <div>
+                                        <input type="text" name="userid" placeholder="Username">
+                                    </div>
+                                    <div>
+                                        <input type="password" name="password" placeholder="Password">
+                                    </div>
+                                    <div id="cp" style="display:none">
+                                        <input type="password" name="passwordConfirm" placeholder="Confirm password">
+                                    </div>
+                                    <div>
+                                        <button id="logbutton">Login</button>
+                                        <br><br>
+                                        <span id="signup"><a>Not Registered?</a></span>
+                                        <script>
+                                            document.getElementById("signup").addEventListener("click", function() {
+                                                document.getElementById("cp").style.display = "block";
+                                                document.getElementById("signup").style.display = "none";
+                                                document.getElementById("logbutton").innerHTML = "Sign Up";
+                                                document.getElementsByTagName('form')[0].action = '/signup';
+                                            });
+                                        </script>
+                                    </div>
+                    </center>
+                    </form>
 
-<% } %>
+                    <% } %>
 
-<% if (loggedIn) { %>
+                        <% if (loggedIn) { %>
 
-    <!--Welcome Message-->
-    <div id="contentwrap">
-        <div id="welcome">
-            <img src="logo.png" id="logo" class="hvr-float-shadow">
-            <div id="r1" class="msg">Hello there! I am here to help you destress your life</div>
-            <div id="r2" class="msg">We shall talk for a little while</div>
-            <div id="r3" class="msg">What do you speak?</div>
-            <div id="container">
-                <input type="radio" name='lang' id="circle-input" checked />
-                <label for="circle-input" id="circle-cont">
+                            <!--Welcome Message-->
+                            <div id="contentwrap">
+                                <div id="welcome">
+                                    <img src="logo.png" id="logo" class="hvr-float-shadow">
+                                    <div id="r1" class="msg">Hello there! I am here to help you destress your life</div>
+                                    <div id="r2" class="msg">We shall talk for a little while</div>
+                                    <div id="r3" class="msg">What do you speak?</div>
+                                    <div id="container">
+                                        <input type="radio" name='lang' id="circle-input" checked />
+                                        <label for="circle-input" id="circle-cont">
             <div id="circle"></div>
             </label>
-                <label for="circle-input" id="label-name">
+                                        <label for="circle-input" id="label-name">
             English
             </label>
-                <input type='radio' name='lang' id="circle-input-2" />
-                <label for="circle-input-2" id="circle-cont-2">
+                                        <input type='radio' name='lang' id="circle-input-2" />
+                                        <label for="circle-input-2" id="circle-cont-2">
             <div id="circle-2"></div>
             </label>
-                <label for="circle-input-2" id="label-name-2">
+                                        <label for="circle-input-2" id="label-name-2">
             Hindi
             </label>
-            </div>
-            <button id="start" class="hvr-underline-from-center">Lets Get Started</button>
-        </div>
-    </div>
-    <!--Mic-->
-    <div id="mic" class="hidden">
-        <div class="frame">
-            <input type="checkbox" id="cb-1" name="cb" class="checkbox">
-            <label for="cb-1" class="label"></label>
-            <div class="microphone">
-                <svg width="100px" height="100px" viewBox="0 0 100 100">
+                                    </div>
+                                    <button id="start" class="hvr-underline-from-center">Lets Get Started</button>
+                                </div>
+                            </div>
+                            <!--Mic-->
+                            <div id="mic" class="hidden">
+                                <div class="frame">
+                                    <input type="checkbox" id="cb-1" name="cb" class="checkbox">
+                                    <label for="cb-1" class="label"></label>
+                                    <div class="microphone">
+                                        <svg width="100px" height="100px" viewBox="0 0 100 100">
 			<circle class="circle" cx="50" cy="50" r="47"/>
 		</svg>
-                <div class="icon">
-                    <div class="body">
-                        <div class="fill"></div>
-                    </div>
-                    <div class="foot_v"></div>
-                    <div class="foot_h"></div>
-                </div>
-                <div class="dots">
-                    <div class="dot dot-1"></div>
-                    <div class="dot dot-2"></div>
-                    <div class="dot dot-3"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Controls-->
-    <div id="controls" class="hidden">
-        <div id="controlwrap">
+                                        <div class="icon">
+                                            <div class="body">
+                                                <div class="fill"></div>
+                                            </div>
+                                            <div class="foot_v"></div>
+                                            <div class="foot_h"></div>
+                                        </div>
+                                        <div class="dots">
+                                            <div class="dot dot-1"></div>
+                                            <div class="dot dot-2"></div>
+                                            <div class="dot dot-3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Controls-->
+                            <div id="controls" class="hidden">
+                                <div id="controlwrap">
 
-            <div id="cr2"><a id="result" class="hvr-underline-from-center">View Results</a></div>
-        </div>
-    </div>
+                                    <div id="cr2"><a id="result" class="hvr-underline-from-center">View Results</a></div>
+                                </div>
+                            </div>
 
-    <!--background clouds-->
-    <div id="Clouds">
-        <div class="Cloud Foreground"></div>
-        <div class="Cloud Background"></div>
-        <div class="Cloud Foreground"></div>
-        <div class="Cloud Background"></div>
-        <div class="Cloud Foreground"></div>
-        <div class="Cloud Background"></div>
-        <div class="Cloud Background"></div>
-        <div class="Cloud Foreground"></div>
-        <div class="Cloud Background"></div>
-        <div class="Cloud Background"></div>
-        <!--  <svg viewBox="0 0 40 24" class="Cloud"><use xlink:href="#Cloud"></use></svg>-->
-    </div>
+                            <!--background clouds-->
+                            <div id="Clouds">
+                                <div class="Cloud Foreground"></div>
+                                <div class="Cloud Background"></div>
+                                <div class="Cloud Foreground"></div>
+                                <div class="Cloud Background"></div>
+                                <div class="Cloud Foreground"></div>
+                                <div class="Cloud Background"></div>
+                                <div class="Cloud Background"></div>
+                                <div class="Cloud Foreground"></div>
+                                <div class="Cloud Background"></div>
+                                <div class="Cloud Background"></div>
+                                <!--  <svg viewBox="0 0 40 24" class="Cloud"><use xlink:href="#Cloud"></use></svg>-->
+                            </div>
 
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="24px" viewBox="0 0 40 24" enable- xml:space="preserve">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="24px" viewBox="0 0 40 24" enable- xml:space="preserve">
   <defs>
     <path id="Cloud" d="M33.85,14.388c-0.176,0-0.343,0.034-0.513,0.054c0.184-0.587,0.279-1.208,0.279-1.853c0-3.463-2.809-6.271-6.272-6.271
 	c-0.38,0-0.752,0.039-1.113,0.104C24.874,2.677,21.293,0,17.083,0c-5.379,0-9.739,4.361-9.739,9.738
@@ -189,10 +166,10 @@
 	C38.409,16.43,36.368,14.388,33.85,14.388z"/>
   </defs>
     </svg>
-    <script src="mic.js"></script>
-    <script src="index.js"></script>
+                            <script src="mic.js"></script>
+                            <script src="index.js"></script>
 
-<% } %>
+                            <% } %>
 </body>
 
 </html>

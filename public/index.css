@@ -1253,3 +1253,28 @@ label#label-name-2 {
     font-size: 1.5em;
     margin-top: 30px;
 }
+
+form div {
+    margin-top: 10px;
+}
+
+form div input {
+    border-radius: 3px;
+    padding: 5px;
+}
+
+form div button,
+#logoutbutton {
+    padding: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 4px;
+    border-color: white;
+    border: 1px solid white;
+    color: white;
+    font-size: 1.2em;
+}
+
+form div button:hover {
+    border: 3px solid white;
+}

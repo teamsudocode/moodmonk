@@ -50,22 +50,33 @@
                 </div>
 
                 <% if (!loggedIn) { %>
-                    <center style="position: absolute; margin-top: 25vh; width: 100vw;">
+                    <center style="position: absolute; margin-top: 5vh; width: 100vw;">
                         <% if (failed) { %>
                             Incorrect userid/password.
                             <% } %>
+
                                 <form action="/login" method="post">
                                     <div>
-                                        <input type="text" name="userid" placeholder="Username">
+                                        <label for="userid" class="formlabel">Username</label>
+                                        <br>
+                                        <input type="text" name="userid" class="inputbox">
                                     </div>
+                                    <br>
+                                    <br>
                                     <div>
-                                        <input type="password" name="password" placeholder="Password">
+                                        <label for="password" class="formlabel">Password</label>
+                                        <br>
+                                        <input type="password" name="password" class="inputbox">
                                     </div>
                                     <div id="cp" style="display:none">
-                                        <input type="password" name="passwordConfirm" placeholder="Confirm password">
+                                        <br>
+                                        <br>
+                                        <label for="passwordConfirm" class="formlabel">Confirm Password</label>
+                                        <br>
+                                        <input type="password" name="passwordConfirm" class="inputbox">
                                     </div>
                                     <div>
-                                        <button id="logbutton">Login</button>
+                                        <button id="logbutton" class="hvr-underline-from-center">Login</button>
                                         <br><br>
                                         <span id="signup"><a>Not Registered?</a></span>
                                         <script>

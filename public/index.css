@@ -1254,17 +1254,8 @@ label#label-name-2 {
     margin-top: 30px;
 }
 
-form div {
-    margin-top: 10px;
-}
-
 form div input {
-    border-radius: 3px;
     padding: 5px;
-}
-
-form div button:hover {
-    border: 3px solid white;
 }
 
 #signup {
@@ -1286,7 +1277,7 @@ form div button:hover {
     padding: 0.5vw;
     font-size: 1.5em;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 40px;
     margin-bottom: 10px;
     box-sizing: border-box;
 }
@@ -1294,4 +1285,29 @@ form div button:hover {
 #logbutton:hover {
     transform: scale(1.1);
     border: none;
+}
+
+
+/*form styles*/
+
+.inputbox {
+    font-family: 'Quicksand', sans-serif;
+    background: transparent;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 1.3em;
+    width: 10vw;
+    border-radius: 0;
+    text-align: center;
+}
+
+input:focus {
+    outline: none;
+}
+
+.formlabel {
+    font-size: 1.2em;
+    font-family: 'Quicksand', sans-serif;
 }

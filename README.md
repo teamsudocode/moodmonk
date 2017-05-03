@@ -4,7 +4,8 @@ MoodMonk is your daily journal which analyses your mood from your speech and dis
 ![Screenshot: Home Screen](https://raw.githubusercontent.com/himanshub16/moodmonk/master/public/homescreen.png)
 
 ## Demo
-[English Version](https://drive.google.com/file/d/0B0Q8qfGisPMeOGtzMVdzVDloaDA/view?usp=sharing)
+* [English Version](https://drive.google.com/file/d/0B0Q8qfGisPMeOGtzMVdzVDloaDA/view?usp=sharing)
+* [Hindi Version](https://drive.google.com/open?id=0B0Q8qfGisPMeZTZQc2tGYjVUUFk)
 
 ### Pre-requisites
 * Ubuntu 16.04+

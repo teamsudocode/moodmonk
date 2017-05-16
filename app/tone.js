@@ -1,5 +1,7 @@
 var request = require('request');
 var http_proxy = require(__dirname+'/../config.json').http_proxy;
+var watson_username = require(__dirname+'/../config.json').watson_username;
+var watson_password = require(__dirname+'/../config.json').watson_password;
 var r = request.defaults({'proxy': http_proxy});
 
 var headers = {
@@ -14,8 +16,8 @@ var options = {
     headers: headers,
     body: dataString,
     auth: {
-        "username": "61cfe4bf-f799-479c-b2a2-54e7085cadfd",
-        "pass": "LmGeondUno35"
+        "username": watson_username,
+        "pass": watson_password
     }
 };
 

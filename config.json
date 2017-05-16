@@ -2,5 +2,8 @@
     "mysqlHost": "localhost",
     "mysqlUser": "root",
     "mysqlPassword": "password",
-    "http_proxy": "http://172.31.1.4:8080/"
+    "http_proxy": "http://172.31.1.4:8080/",
+    "watson_username": "61cfe4bf-f799-479c-b2a2-54e7085cadfd",
+    "watson_password": "LmGeondUno35",
+    "youtube_auth" : "AIzaSyAoN1RLSoqgf7ujPK-2cfT8pz4qQR1_tvg"
 }

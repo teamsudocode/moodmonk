@@ -1,12 +1,13 @@
 'use strict';
 var request = require('request');
 var http_proxy = require(__dirname+"/../config.json").http_proxy;
+var youtube_auth = require(__dirname+"/../config.json").youtube_auth;
 var r = request.defaults({ 'proxy': http_proxy });
 
 var google = require('googleapis');
 google.options({ proxy: http_proxy });
 
-var youtube = google.youtube({ version: 'v3', auth: 'AIzaSyAoN1RLSoqgf7ujPK-2cfT8pz4qQR1_tvg' });
+var youtube = google.youtube({ version: 'v3', auth: youtube_auth });
 
 function getQuotes(emotion, callback) {
     //retrieving quotes
